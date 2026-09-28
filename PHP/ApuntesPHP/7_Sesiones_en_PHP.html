@@ -1,0 +1,724 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Sesiones en PHP</title>
+	<meta name='Generator' content='Zim 0.75.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">Sesiones en PHP</a> <br>
+            &nbsp; &nbsp; <a href="#h2">Código básico: un contador de visitas</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Eliminar la sesión</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Duración de la sesión <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            &nbsp; &nbsp; <a href="#h5">Cookies</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; RGPD <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+            <a href="#h7">Ejercicios</a> <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; Posible solución ejercicio 2 <br>
+        <!-- ocultamos el contenido entre ocultar y finocultar -->
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">Sesiones en PHP</h1>
+			<p>
+Las sesiones permiten almacenar información sobre un usuario en el servidor, esta información se almacenará mientras la sesión no se cierre y por tanto no se perderá si el usuario va de una página a otra de nuestra aplicación. Por defecto esta información se almacena en un fichero (en un directorio temporal), aunque si tenemos suficiente memoria RAM podemos usar <i>memcached</i> u otras opciones para acelerar el acceso a la información utilizando la memoria del servidor.
+</p>
+<br>
+<p>
+Estamos acostumbrados a que este comportamiento ocurra, por ejemplo al utilizar el correo electrónico tendremos que iniciar sesión y podremos seguir usándolo viendo correos electrónicos, eliminándolos o escribiéndolos sin necesidad de estar autenticándonos cada vez que queremos realizar una operación.<br>
+Otro ejemplo típico es el de una tienda on-line, donde podemos ir añadiendo productos al carrito, yendo de página en página y viendo productos sin que se pierda el contenido del mismo y sin tener que volver a iniciar sesión con nuestro usuario en la tienda (para el carrito se puede usar del lado del cliente tecnologías de Javascript como LocalStorage o IndexedDB).
+</p>
+<br>
+<p>
+El funcionamiento por defecto es este:
+</p>
+<ul style='padding-left: 30pt'>
+<li>Al iniciar sesión, el servidor asigna un ID al cliente. </li>
+<li>Este ID se guarda en el cliente en forma de <i>cookie</i> (una <i>cookie</i> de sesión).</li>
+<li>El servidor genera un fichero con los datos a guardar.</li>
+<li>En cada petición del cliente, se manda también el ID a través de la cookie.</li>
+<li>Podemos ver la <i>cookie</i> en las opciones del desarrollador en la sección de <i>Almacenamiento</i>.</li>
+</ul>
+<br>
+<p>
+Los parámetros de dónde se guarda la sesión en el servidor podemos verlo en el fichero <tt>php.ini</tt> o ejecutando un <tt>phpinfo();</tt>
+</p>
+<br>
+<br>
+
+			<h2 id="h2">Código básico: un contador de visitas</h2>
+			<p>
+Antes de poder guardar información en el array <tt>$_SESSION</tt> tenemos que iniciar la sesión con la función <tt>session_start()</tt>.
+</p>
+<br>
+<pre>
+&lt;?php
+		session_start();
+
+		if( !isset($_SESSION['visitas']) ){
+			$_SESSION['visitas'] = 1;
+		}else{
+			$_SESSION['visitas']++;
+		}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+	&lt;title&gt;Pruebas de PHP&lt;/title&gt;
+	&lt;link rel="stylesheet" href="estilos.css"&gt;
+	&lt;script defer src="codigo.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h1&gt;Pruebas&lt;/h1&gt;
+		&lt;?php 
+		echo '&lt;p&gt;Visitas: ', $_SESSION['visitas'] ,'&lt;/p&gt;';
+		?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<br>
+<br>
+<br>
+<p>
+<b>Importante</b>: el <tt>session_start()</tt> hay que ponerlo al principio de todo, antes de la etiqueta <tt>&lt;html&gt;</tt> o el <tt>&lt;!DOCTYPE&gt;</tt>, de lo contrario obtendremos este <i>warning</i>:<br>
+<tt>Warning: session_start(): Cannot start session when headers already sent in /var/www/html/servidor.php</tt>
+</p>
+<br>
+<p>
+Incluso cerrando la pestaña y volviéndola a abrir, el contador de visitas se mantendrá con el valor que tenía antes mientras la duración de la sesión no expire.
+</p>
+<br>
+<p>
+<b>Importante</b>: No se pueden guardar en la sesión datos como en un array usando un ínidice. Estos dos ejemplos <b>son incorrectos</b>:
+</p>
+<pre>
+$_SESSION[] = "Hola";
+$_SESSION[3] = "Caracola";
+</pre>
+<br>
+<br>
+
+			<h2 id="h3">Eliminar la sesión</h2>
+			<p>
+Para eliminar la sesión usaremos <tt>session_destroy();</tt> Veamos su uso con una web que incrementa, decrementa o elimina un valor en el array de <tt>$_SESSION[]</tt>
+</p>
+<br>
+<p>
+Ejemplo de fichero <tt>sesion.php</tt>
+</p>
+<pre>
+&lt;?php
+	session_start();
+
+	if( !isset($_SESSION['valor']) ){
+		$_SESSION['valor'] = 0;
+	}
+
+	if( isset($_POST['txtAccion']) ){
+		if( $_POST['txtAccion'] == "inc" ){
+			$_SESSION['valor']++;
+		}
+		else if( $_POST['txtAccion'] == "dec" ){
+			$_SESSION['valor']--;
+		}
+		else if( $_POST['txtAccion'] == "borrar" ){
+			session_destroy();     // elimina la sesión
+			header("refresh: 0;"); // refresca la página
+		}
+		else{ //no debería ocurrir, pero si lo hace eliminamos la sesión
+			session_destroy();
+		}
+	}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+	&lt;title&gt;Pruebas de PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h1&gt;Creación y destrucción de una sesión&lt;/h1&gt;
+	&lt;form method="POST" action="sesion.php"&gt;
+		&lt;select name="txtAccion" id="txtAccion" size="3"&gt;
+			&lt;option value="inc"&gt;Incrementar&lt;/option&gt;
+			&lt;option value="dec"&gt;Decrementar&lt;/option&gt;
+			&lt;option value="borrar"&gt;Borrar&lt;/option&gt;
+		&lt;/select&gt;
+		&lt;input type="submit" value="Enviar"&gt;
+	&lt;/form&gt;
+
+	&lt;div id="divResultado"&gt;
+		&lt;?php 
+			echo '&lt;p&gt;Valor: ', $_SESSION['valor'] ,'&lt;/p&gt;';
+		?&gt;
+	&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<br>
+<p>
+<b>Nota</b>: probablemente en el <tt>select</tt> sería más apropiado quitar el atributo <tt>size="3"</tt> para que aparezca un <i>combobox</i> en vez de un <i>listbox</i>.
+</p>
+<br>
+<p>
+<b>Importante</b>: se puede eliminar una variable de la sesión con <tt>unset($_SESSION['nombreVariable'])</tt>, pero cuidado con hacer directamente un <tt>unset($_SESSION)</tt>, pues destruiremos la sesión completamente.
+</p>
+<br>
+<p>
+<b>Nota</b>: por defecto la <i>cookie</i> de sesión en el cliente se elimina al cerrar el navegador, pero no al cerrar una pestaña. Este es el comportamiento habitual de los navegadores.
+</p>
+<br>
+<br>
+
+            
+				<h3>Duración de la sesión<a id="duración-de-la-sesión" class="h_anchor"></a></h3>
+<br>
+<p>
+Por defecto la duración de una sesión en PHP es de 1440 segundos (24 minutos) y pasado ese tiempo esos datos pasan a ser considerados basura y existe la posibilidad de que el recolector de basura de PHP (el garbage collector) los borre.
+</p>
+<br>
+<p>
+La duración de una sesión se puede establecer en el momento de su creación.
+</p>
+<br>
+<p>
+Por ejemplo:
+</p>
+<pre>
+session_set_cookie_params( 7200 ); //2 horas
+session_start();
+</pre>
+<br>
+<p>
+Pasadas ese tiempo (el establecido por defecto o el que hayamos indicado nosotros), la cookie se eliminará. Podemos extender la vida útil de la cookie con un código como el que sigue:
+</p>
+<br>
+<pre>
+&lt;?php
+  $tiempo = 600; //10 minutos
+  session_start();
+  setcookie( session_name(), session_id(), time() + $tiempo);
+?&gt;
+</pre>
+<br>
+<br>
+ <br>
+			<h2 id="h5">Cookies</h2>
+			<p>
+Una <i>cookie</i> es un fichero con algo de información que se guarda en el ordenador del cliente con información que resistirá más tiempo que la sesión. Aunque probablemente sea más sencillo utilizar el <tt>localStorage</tt> desde Javascript, desde PHP podemos almacenar información usando <i>cookies</i> aunque la cantidad de información que puede almacenar una <i>cookie</i> es bastante más limitada.
+</p>
+<br>
+<p>
+El tamaño máximo que se puede guardar en una <i>cookie</i> está limitado a 4KB y no se pueden almacenar más de 50 <i>cookies</i> por servidor.
+</p>
+<br>
+<p>
+<tt>setcookie(nombre, valor, momento de expiración);</tt>
+</p>
+<br>
+<p>
+Por ejemplo:<br>
+<tt>setcookie("colorPreferido", "#F03276", time() + 7*24*60*60); //una semana 7 días * 24 horas * 60 min * 60 seg</tt><br>
+<tt>setcookie("colorPreferido", "#F03276", strtotime( '+30 days' )); //un mes de duración</tt>
+</p>
+<br>
+<p>
+<b>Nota</b>: Si en el momento de la creación se establece como tiempo de vida <tt>0</tt> o no se indica (se omite) la <i>cookie</i> caducará automáticamente al cerrar el navegador. Pero aunque el navegador elimine la <i>cookie</i>, en el servidor seguirá existiendo mientras al <i>garbage collector</i> no la borre.
+</p>
+<br>
+<p>
+Recuperaremos el valor almacenado usando el array asociativo <tt>$_COOKIE[]</tt>:<br>
+<tt>$colorPreferido = $_COOKIE["colorPreferido"];</tt>
+</p>
+<br>
+<p>
+Podemos imprimir todas las cookies con <tt>print_r( $_COOKIE);</tt>
+</p>
+<br>
+<p>
+Para eliminar una cookie se puede establecer su valor a null y su validez a -1 (y además borramos la variable que contenía el valor):
+</p>
+<pre>
+setcookie("colorPreferido", "", -1);
+unset($colorPreferido);
+</pre>
+<br>
+<p>
+<b>Nota</b>: no se deben utilizar puntos en el nombre de la <i>cookie</i>. Por ejemplo <tt>setcookie("hola.caracola", 5, time() + 256);</tt> es un nombre potencialmente problemático.
+</p>
+<br>
+<p>
+<b>Importante</b>: si necesitamos almacenar un booleano en una <i>cookie</i>, debemos usar como valor <tt>0</tt> (en lugar de <tt>false</tt>) o <tt>1</tt> (en vez de usar <tt>true</tt>). Esto es porque un valor de <tt>false</tt> es interpretado como que la <i>cookie</i> puede ser eliminada.
+</p>
+<br>
+<p>
+<b>Importante</b>: las cookies se actualizan al recargar la página, por lo que aunque cambiemos su valor con una orden <tt>setcookie()</tt>, mantendrá el valor que tenía la última vez que se cargó la página.
+</p>
+<br>
+<br>
+
+            
+				<h3>RGPD<a id="rgpd" class="h_anchor"></a></h3>
+<br>
+<p>
+<a href="https://es.wikipedia.org/wiki/Reglamento_General_de_Protecci%C3%B3n_de_Datos" title="https://es.wikipedia.org/wiki/Reglamento_General_de_Protecci%C3%B3n_de_Datos" class="https">https://es.wikipedia.org/wiki/Reglamento_General_de_Protecci%C3%B3n_de_Datos</a>
+</p>
+<br>
+<p>
+El RGPD de la Unión Europea no distingue entre <i>cookie</i>, <i>localStorage</i> o <i>IndexedDB</i>. Toda tecnología que permita almacenar datos sobre un usuario o equipo cliente se ve afectada por ella.
+</p>
+<br>
+<p>
+El RGPD de la Unión Europea establece que no hay necesidad de pedir consentimiento para las <i>cookies</i> técnicas, es decir, aquellas que son estrictamente necesarias para el correcto funcionamiento de una aplicación web.
+</p>
+<br>
+<p>
+Sin embargo sí hay que pedir consentimiento <b>explícito</b> al usuario <b>antes</b> de almacenar una <i>cookie</i> no técnica (de seguimiento, publicidad u otros fines).
+</p>
+<ul style='padding-left: 30pt'>
+<li>Se establece como requisito que el usuario debe conocer qué datos se van a almacenar y de qué manera se van a utilizar sin ambigüedades.</li>
+<li>El usuario debe poder rechazar la <i>cookie</i> si así lo desea.</li>
+<li>El consentimiento o rechazo deben ser igualmente sencillos. Si es sencillo aceptar todo, debe ser sencillo rechazar todo. La opción de rechazar debe estar tan visible como la opción de aceptar.</li>
+<li>No se pueden incluir en los formularios de consentimiento casillas premarcadas, esto está expresamente prohibido.</li>
+<li>Imponer aceptar <i>cookies</i> que no sean técnicas para acceder a un sitio web ha sido declaradas ilegales en la Unión Europea. El que el consentimiento sea libre y no coaccionado es un requisito de la legislación europea.</li>
+</ul>
+<br>
+<br>
+ <br>
+			<h1 id="h7">Ejercicios</h1>
+			<p>
+<b>Ejercicio 1</b>: Crea una web cuyo color de fondo (propiedad <tt>background-color</tt>) sea azulado. La web contendrá un formulario que permita elegir un color y enviar la selección al servidor. Desde el servidor, se guardará en una <i>cookie</i> el color de fondo elegido y se cargará la misma página inicial pero con el color elegido. Si se vuelve a acceder a la página, el color de fondo mantendrá el color elegido y no el que tenía por defecto.
+</p>
+<br>
+<p>
+<b>Nota</b>: el cambio color podría tener efecto en el siguiente refresco de la página por la manera en la que funcionan las <i>cookies</i>.
+</p>
+<br>
+<p>
+<b>Ejercicio 2</b>: Crea una web con un formulario que contenga un cuadro de texto en el que el usuario introducirá un número y un par de botones de <i>submit</i>. El primer botón hará que se realice una llamada en el servidor y se añadirá a un array dentro de la sesión el número que haya introducido el usuario. El segundo botón hará que se calcule el mayor número introducido, el menor y la media, los mostrará y eliminará la sesión. <br>
+Si se pulsa el segundo botón sin haber introducido ningún número, se indicará sin calcular nada.
+</p>
+<br>
+<p>
+<b>Ejercicio 3</b>: Crea una web que en el <tt>index.php</tt> se compruebe si el usuario es un humano o un robot. Esta información debe estar guardada en la sesión (por ejemplo en <tt>$_SESSION['humano']</tt>).<br>
+Si el usuario no es un humano o no se sabe aún, generará a modo de <i>captcha</i> una operación aritmética que el usuario debe responder. Por ejemplo, se le pide al usuario que indique qué número hay que sumar a 7 para que el resultado sea 15 o qué número multiplicado por 3 da como resultado 21. Estas preguntas deben ser generadas aleatoriamente.<br>
+Cuando la respuesta del usuario llegue al servidor, se comprobará si son correctas o no. Si la respuesta dada no es correcta, se volverá a mostrar el formulario de antes con una nueva operación.<br>
+Si la respuesta es correcta, se redirigirá al fichero <tt>acceso.php</tt>.<br>
+Si el usuario intenta acceder al fichero <tt>acceso.php</tt> por su cuenta sin haber respondido correctamente, se le redirigirá al <tt>index.php</tt> de nuevo.<br>
+<b>Nota</b>: Se puede redirigir a una página diferente usando <tt>header('Location:</tt> <a href="http://www.example.com/'" title="http://www.example.com/'" class="http"><tt>http://www.example.com/</tt>'</a><tt>);</tt> pero sólo si no se ha mandado aún ninguna otra etiqueta HTML.
+</p>
+<br>
+<p>
+<b>Ejercicio 4</b>: <br>
+Crea una tienda on-line sencilla con un catálogo de productos y un carrito de la compra. Un catálogo de cuatro o cinco productos será suficiente. De cada producto se debe conocer al menos la descripción y el precio. Todos los productos deben tener una imagen que los identifique. Al lado de cada producto del catálogo deberá aparecer un botón <i>Comprar</i> que permita añadirlo al carrito.<br>
+Si el usuario hace clic en el botón <i>Comprar</i> de un producto que ya estaba en el carrito, se deberá incrementar el número de unidades de dicho producto. Para cada producto que aparece en el carrito, habrá un botón <i>Eliminar</i> por si el usuario se arrepiente y quiere quitar un producto concreto del carrito de la compra. Pulsando sobre el carrito se mostrará un resumen de los productos elegidos.
+</p>
+<br>
+<br>
+<br>
+
+            
+				<h3>Posible solución ejercicio 2<a id="posible-solución-ejercicio-2" class="h_anchor"></a></h3>
+<pre>
+&lt;?php
+  session_start();
+  if( !isset($_SESSION['valores']) )
+    $_SESSION['valores'] = [];
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Pruebas de PHP&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+  &lt;script defer src="codigo.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Pruebas&lt;/h1&gt;
+
+  &lt;form method="POST" action="servidor.php"&gt;
+    &lt;input type="number" name="txtNumber"   id="txtNumber"&gt;&lt;br&gt;
+    &lt;input type="submit" name="btnAnadir"   id="btnAnadir"   value="Añadir"&gt;
+    &lt;input type="submit" name="btnCalcular" id="btnCalcular" value="Calcular"&gt;
+  &lt;/form&gt;
+
+  &lt;div id="divResultado"&gt;
+  &lt;?php
+  //si se pulsa el botón de añadir y hay un dato
+  if( isset($_POST['txtNumber'] ) &amp;&amp; isset($_POST['btnAnadir']) ){
+    $n = $_POST['txtNumber'];
+    array_push( $_SESSION['valores'], $n ); //añadimos un valor al array
+  }
+
+  if( isset($_POST['btnCalcular']) ){//si el botón pulsado es el de calcular
+    $arr = $_SESSION['valores'];
+
+    if( count( $arr ) != 0){ //calculamos la media, el mayor y el menor
+      $suma = 0;
+      $min=INF;  //  infinito
+      $max=-INF; // -infinito
+      foreach ($arr as $num) {
+        $suma += $num;
+        if($num&lt;$min) $min=$num;
+        if($num&gt;$max) $max=$num;
+      }
+      $media = $suma / count( $arr );
+      echo "&lt;p&gt;Media: ", $media ,"&lt;/p&gt;";
+      echo "&lt;p&gt;Max: ", $max ,"&lt;/p&gt;";
+      echo "&lt;p&gt;Min: ", $min ,"&lt;/p&gt;";
+  }
+  else
+    echo "&lt;p&gt;No se ha introducido ningún número&lt;/p&gt;";
+    session_destroy();
+  }
+
+  ?&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<br>
+ <br>
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.twitch.tv/profesorinfo">https://www.twitch.tv/profesorinfo</a></p>
+   </div>
+</body>
+
+</html>

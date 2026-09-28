@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Curriculum Vitae de Bruce Wayne</title>
+    <style>
+        h2 {
+            border-bottom: 2px black solid;
+        }
+
+        #academico li,
+        #laboral li {
+            color: blue;
+        }
+
+        strong {
+            color: black;
+        }
+
+        li strong {
+            display: block;
+        }
+
+        @media (min-width:600px) {
+            h2 {
+                border: none;
+            }
+
+            .container {
+                display: flex;
+            }
+
+            #academico li strong,
+            #laboral li strong {
+                display: inline;
+            }
+        }
+
+        @media (min-width:1200px) {
+            .container2 {
+                display: flex;
+            }
+
+            li strong {
+                display: inline;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Curriculum Vitae de Bruce Wayne</h1>
+    <div class="container">
+
+        <div>
+            <section>
+                <h2>Datos personales</h2>
+                <ul>
+                    <li>Nombre completo: <strong>Bruce Wayne</strong></li>
+                    <li>Fecha de nacimiento: <strong>1/5/1939</strong></li>
+                    <li>Lugar de nacimiento: <strong>Gotham City</strong></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="container2">
+            <section id="academico">
+                <h2>Formación académica</h2>
+                <ul>
+                    <li>1956-1961: <strong>Universidad del Espantapájaros</strong></li>
+                    <li>1952-1956: <strong>Instituto de Dos Caras</strong></li>
+                    <li>1944-1952: <strong>Escuela Primaria del Joker</strong></li>
+                </ul>
+            </section>
+
+            <section id="laboral">
+                <h2>Experiencia laboral</h2>
+                <ul>
+                    <li>1975-1985: <strong>En el paro</strong></li>
+                    <li>1965-1975: <strong>Cazavillanos y demás chusma</strong></li>
+                    <li>1962-1965: <strong>Aprendiz de superhéroe</strong></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

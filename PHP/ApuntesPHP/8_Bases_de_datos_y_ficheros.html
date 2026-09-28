@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>8 Bases de datos y ficheros</title>
+	<meta name='Generator' content='Zim 0.75.1'>
+	<style type='text/css'>
+	    @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Jost&display=swap');
+	    :root {
+  			--html-background-color: #456;
+  			--html-background-color-image: linear-gradient( 0deg, rgba(24,95,240,1) 16.4%, rgba(5,23,111,1) 70% );
+  			
+  			--main-color: #47b;
+  			--main-background-color: #fff;
+  			
+  			--heading1-color-text: #eeffff;
+  			--heading1-background-color: #47b;
+  			--heading1-background-image: linear-gradient(to right, var(--main-color), #70bbdd);
+  			
+  			--code-color-text: #247;
+  			
+  			--input-background-color: #33a;
+  			--input-background-color-hover: #44b
+
+		}
+
+	    html       { /*background-image: linear-gradient(#f2faff,#fff);*/
+background-color: var(--html-background-color);
+background-image: var(--html-background-color-image);
+	    }
+	    body       { font-family: 'Jost', 'Noto', 'Arial', 'Sans-serif';
+	    				margin:0;
+	                 }
+	    div#contenido{
+	    	margin: 0 auto; padding: 1rem; max-width: 90ch;
+	    	background-color: var(--main-background-color);
+	    	margin-bottom: 200px;
+	    	border-bottom-right-radius: 100px;
+			border-bottom: 5px solid darkblue;
+			box-shadow: 0px 10px 10px -1px #1e90ff10, 
+						  10px 30px 20px -1px #1e90ff40, 
+						 -10px 30px 20px -1px #1e90ff40;			
+	    }
+	    input[type="button"]{
+	                 background-color: var(--input-background-color);
+                     color: white;
+                     border-radius: 5px;
+                     border: 3px solid #44b;
+                     cursor: pointer;
+                     padding: 0.5rem;
+                     margin-left: 0.5rem;
+                     margin-right: 0.5rem;
+                     transition: margin-all 3s ease-in-out 3s;
+        }
+        input[type="button"]:hover{
+	                 background-color: var(--input-background-color-hover);
+        }
+        input[type="button"]:active {
+			  transform: translateY(2px);
+			  cursor: progress;
+		  }
+		a,a:visited  { text-decoration: none;color:blue;      }
+		a:hover    { text-decoration: underline; color: dodgerblue; }
+		a:active   { text-decoration: underline }
+		strike     { color: grey                }
+		u          { text-decoration: none;
+					 background-color: yellow   }
+		tt         { color: var(--code-color-text);
+				    	 font-size: large;
+		             background-color: rgba(.99, .99, 1, 0.1); 
+		           }
+		pre        { color: var(--code-color-text);
+		             background-color: rgba(.99, .99, 1, 0.1);
+					 padding: 20px;
+					 font-size: large;
+				   }
+		div.zim-object pre        {
+		             background-color: white;
+					 padding: 0px;
+				   }				   
+		h1         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             text-decoration: none;
+					 /*color: #33a;
+					 border-bottom: 5px dotted #33a;*/
+					 /*margin-top: 2rem; 
+					 margin-bottom: 1rem; 
+					 
+					 border-radius: 5px;
+					 padding: 5px;
+					 color: var(--heading1-color-text);
+					 background-color: var(--heading1-background-color);
+					 background-image: var(--heading1-background-image);
+					 
+					 font-size: xxx-large;*/
+					font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+					text-decoration: none;
+					margin-top: 2rem;
+					margin-bottom: 2rem;
+					border-radius: 2px;
+					padding: 5px;
+					color: var(--heading1-color-text);
+					background-color: var(--heading1-background-color);
+					background-image: linear-gradient(45deg, #0bb,#3fb,#78F);
+					font-size: xxx-large;
+					position: relative;
+					z-index: 1;
+					box-shadow: 5px 5px 0px 2px rebeccapurple;
+				   }
+	h1::before {
+		  content: '';
+		  position: absolute;
+		  background-color: navy;
+			transform: skewY(-8deg) rotate(7deg);
+			top: -16px;
+			left: 0;
+			right: 0;
+			bottom: 16px;
+			z-index: -1; /*detrás del texto, pero delante del fondo */
+	  }
+		h2         { font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: xx-large;
+		             border-bottom: 2px solid var(--heading1-background-color);
+		           }
+		h3         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             font-size: x-large;
+		             font-style: italic;
+		             margin-left: 0.5rem; 
+		           }
+		h4         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color); 
+		             margin-bottom: 0.5rem;
+		             margin-top: 1.5rem;
+		             margin-left: 1rem;
+		             filter: brightness(1.1);
+		           }
+		h5         { 
+		             font-family: 'Montserrat', 'Noto', 'Roboto', 'Arial', 'Sans-serif';
+		             color: var(--heading1-background-color);  
+		             margin-bottom: 0.5rem; 
+		             margin-top: 1.5rem;
+		             filter: brightness(1.1);
+		           }
+		p          { margin-top: 0.25rem;  }
+		span.zim-tag {
+			color: #ce5c00;
+		}
+		img{
+		    scale: 75%;
+		    max-width:100%;
+		    margin: 0 auto; /* para centrar las imágenes */
+			 display: flex; /* para centrar las imágenes */
+		}
+		img:hover{
+		    scale: 100%;
+		    max-width:100%;
+		}
+		div.zim-object {
+			border-style:solid;
+			border-width:1px;
+		}
+		form{
+            padding: 0.5rem;
+            background-color: #125;
+            border-radius: 0px;
+            text-align: center;
+            margin-bottom: 1rem;
+		}
+		ul{
+		    list-style-type: '▪️ '; /*square*/
+		}
+		div#sumario{
+            margin: 0 auto; 
+            padding: 1rem; 
+            max-width: 90ch;
+            background-color: aquamarine; /*greenyellow;/*moccasin;*/
+/*            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(166,239,253,1) 0%, rgba(97,186,255,1) 90.1% );
+*/
+				background-position:bottom;
+				background-repeat: no-repeat;
+				background-image: url('data:image/svg+xml, <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: %23ffffff; width: 100%; height: 180px; transform: rotate(180deg);" ><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" /></svg>');
+
+            /*border-radius: 0px;*/
+            border-top-right-radius: 152px;
+		}
+		div#sumario a {
+			color:#0000dd;
+		}
+		div#sumario h1{
+			margin-right: 300px;
+			text-align: center;
+			box-shadow: 5px 5px 0px 2px white;
+		}
+		div#volver{
+		    position: fixed;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 3px solid #7af;
+            border-radius: 50%;
+		}
+		div#volver:hover {
+			filter: brightness(1.2) saturate(1.2);
+		}
+		div#pie{
+			min-height: 200px; 
+			/*background-color: #47b;*/
+			color: #cef;
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			position: fixed; 
+			bottom:0; left:0; right: 0;
+			z-index: -1;
+			background-image: linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100% );
+			font-size: larger;
+			text-align:center;
+		}
+		div#pie a{
+			color: deepskyblue;
+		}
+		pre.codigo{
+			border: 1px solid blue;
+			padding: 5px;
+			background-color: aliceblue;
+			border-radius: 5px;
+		}
+		
+		div.codigoresultado{
+			background-color: #469;
+			color: whitesmoke;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.checked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8sMEGsKGkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEBUlEQVRIx62V22tdRRTGf7Nn73P2ybntnNOe3NqkPTGgLTVUUZF6QatSLOKTPgqCIqLgQ0H/A1sQQbBYCBb1QfAxiC8tSO1FqHkwJVKtjdTGNraUmObsc9nXmfGh7cGYpM1D5nHWzPetteZb3wg2eB2YqYm4zSadsMtoboiNBH/3TE0awx6j+MRoxoTg/IYRvP19TQrJS0bzhdHGSyKFkLTtjSKwMjyiEz43ynhtP6bdjBCWyFobAf7eT7VhNF/q1FRbjYjmUohlCVPwnB+6FUxMTJipqSmUUhhjEGKd3bMT4ks/Y6oLBK2Yth8hHYtCJXOix7Nf7xLMzc0xOzvLzp078TyPNE3viW3QJPXzhNWbxFFKHCmMhoLn/FHodd48vGfhapdAacXQlkFK5dL6wIUm6fuTZPuvqDQhaMUYYyiVyuQr6rXDexYuAdi3tSv1ZJNs/R/CaszzT+1na88uXFnCEnJVgivBNN8uTJKmHQI/ptOOcXNZzMz9mOqFs90OHpipWcYwlo5P4ebnuOkrvr5wgrH+h3im7y36MzuwRXYZeKha/OhP0EkadFoxQSdGSotedR/+XwMc2XvKdNUFOFqZx6LKZWIiwjgkikNmLp/hm8sH+K1zjFTHXfBYdTi+eJArzXM0GxFxoBDCopLvo/fqEwi1XPkWkGqjFo2TgB1jOYZUKZTS/D1/ncmLh7jon0IbRWoiTi59ymzzJEEQE3cStNZsGxqlfPE57MBbOR8fP3hDGalOO9fq2DlBvmZw8xa2IxACGn6TydlD/O6f5OzSV/zif0cYhLQaEXGkKBbz7Ov/AOlXV1cxgBJRI3fuSTrpTawt18kWIZN1CFuaONI0w0WOXfsI43YIggh/KUSlhqxrMz74AkOZcWBm9QkH+Gw8NDLuITi+m0yzhluSyJzBLcpblUhFxywSRAEtPwQjsKVN30CNh0uvYuOubSHLtN3J0TO1j0pmBNuFbFWRK0gyPRZpktL2I5JQkclKakNlnh54g6ocvevUr/Ai2a7wineEkcJupA3S1Wg0nVZM2E6wbEF5U5G9Q++wI7sfR7h3N8HVNstykBfzH+KJEZwiWD0aIwxCgJ0R1Mu7GXOeJSuK93bZtQIle4D9pUNU5DC5jEsu55AvZakM5NicGyEj8uuz8bUCQgj67QfY671P3vEoeC69gy695U1U7NG7XV0pUwBjDJa1/JJlWWxzHuflzQe5FJ/GsgUVuZ2t8lEkTvfc0aNHb72flBhjVicQQqCUuvM3/M+WDVguWBrMVdDXEGZlBVEUrVCU9d9s5+fnaTQa2PZyPxEIhJaI1EEoZwX4ncynp6fXrmB4eJjR0VFarRbNZnP9P9rt9gohqNVq1Ov1ZbF/AZGev3hLJ2/zAAAAAElFTkSuQmCC)}
+		.xchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8bDYnDxEwAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEK0lEQVRIx9WVS2hTWRjHf/eR3CY1nbxMH2YiZRQS6qO13YlMVxY3SnVcuNIBFezGpSADLoQqLu1sHJCqdCFSXFpw4YOCSH3BtFqttTNamabX3DS5bfO6uffMoglja3RGcDMHzuac7/z/53++//cd+L8P6VuCPQYZ8ADNgBd4J31DcDcQs+GnHByRocEDv0kfBSjAOlYCs11Q+gpwDegS8LMJ+3QIK0ATzEhV8Odnz5bzw8P4dJ25aJQ/WlvJ1df/K7hSLtOcTNI+Pk69rpMTgqIQhCDvh1/VSpw79+gRrRMTmLZNezLJJsPg+a5dmOEwQlFqg1sWG16/Jv7sGWXDwBACFQjC9HcwIMONKkGp4PGAJGEDS0IQmZlhnWnye3c3eiyGo6qr3WHbrJ+dJf7gAXI6zSIr72T7/fgzmT4FHnTBsgrQBfYvTU0km5vxz86iADnAm0rRPTWFt7cXZccOJJcLAGHb2K9ekT93jmwmwwdAAFpjI6Ntbfxw5879ag7l6o1sr5eHHR3IsRgeQK/M4sQE+YEB7JcvEY6zAj45SWFgAPPxYwzHoQxIkQjTPT0kIxE+Noj8sexFn4/xnh58iQTeSpHkHAdrbIzi0BCOrmNPTpK/eJHM3bt8sCyKQCiR4NWePWSiUZw1+ZLXJm4pFKLhzBlCsRh2RUXacVgeGaF47RrL58+zcP8+RrmMkCQinZ1EL1zAjERqmkH+tLYl1G3bCJw4QUjT0IA0MJfLMX/5MqmHD0nZNiUgtGULG/r7ccXjINWuWbnmqsuFu7sb/4EDNLlcBIEioNs2KUAFGmMxmk6dQm1tRZI+3xBqEkiShBQOox05Ql1nJ26gvuIUAWiKQnj/ftStW5Fk+YuF+NldsbBA4cYN9KdPmaso8Fc62ZJtk7l1C2t0FGdxESHE1xE4hkHh6lX0oSHSpRIewC/LrPf7CSgKNpCamkI/fZr8pUuIZBIcpyaBunahPp1mub+fDyMjGKUSChCsq6Nh717q9u2jbnSU0uAgRrFIwTThyhUCqRS+hgZKLS1fJvDm87SNjZGcnsYUAjcQ8vsJ9/Xh7u1FDgRQN20iks3iDA+zZFmYhQLqzZtsj8WY3L0baY2Sf55ICCKpFHUzM2SEQAJCHg+hY8fQDh5EDgRWDoRC1J88SePRo2geD0XAcBy8b98Sv3ePYDZbbf2rFQjLIphMsmDbaEBQVQkePox26BCSz7e6i4bDrDt+nGYhmBscpFAskheC4Js3bPR4qHphFYEnlcI7P4/jdqNpGu8TCe4oCsXr1z//F2ga3+/cSfTJE0qmSVYIsKzaOZDcbjKyzFIiwfvt21kMBLA07YsetzWNd+3tLLW0sH5igvT8PH9Go/z44kX+E4LGjg7GDYOcy4XlOEgLC//5P/5LCFzxOPLmzWyIx+m6fduu7v0NVGqyTSycKksAAAAASUVORK5CYII=)}
+		.unchecked-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB9gKGQ8qAt8h3m8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAA60lEQVRIx+2VsQqDMBRF70sCLg5OLoKgjk7+lJ/hh+STXBwcnRz8ArMEkrxOFktbaC3tULzTg5e8k5vADXDq70VbobXmvu/hvQczg4heHrJfXxQFuq67blZbMc8zpmlCXddIkgTOuZcBUko45zCOI6y1Nz2xFSEEZFmGOI7fGg4A3nsQEZqmuXOu9jallACAtm3fvmutNaIoAjM/dkBECCF89KCbk4eAb+kEnIAT8EsAM0OIz3hSyrssUvss8t5fg+uIrLXPs0gIgWVZYIyBUurQyYdheO4gz3NUVQVjDNZ1PfSjpWmKsixvehfB9GBZ3NndrgAAAABJRU5ErkJggg==)}
+		.migrated-box {list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAANOgAADMQBiN+4gQAAAAd0SU1FB+AKHREFA8vJSnkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC1klEQVRIx+2VT0hUURTGf/e958w4Tc3TYowMw1GyEgwr1MqsFmbZIrIWQZsWJUjbdoHQpl3Qps0swnCRECQFYkR/TC1iKkqmfzAKTo2Vf8hoRsfR995tkRMT87RRWkUHHhy495zvnvvu933wP/75EKkkEAjIYDCIaZpIKRFCZN0kfX9xcTGtra2/irVUEolECIfDlJeXo+s6hmFkDaCqKoZhEAqFSCaTv60pqcSyLAoLC/F4PEtqDmCaJkIIKisrMybX0sdUVRWA5ubmPzdNjjI1cpXkZC/O1fV03PXgdDqRUtpPIITAsqxsDz0Z/3CZQv8uqo4N4C8/Tp2/DdM0MiZQlvk41OTkI/LW1SGtCVb5drD3eCc71wcA+VcAHA5vDd8+3UGakxiJV7i9pdQevU5T1R35pJ3MV5QW1pf+0kWBheJ2SWua8EQXZXsu4fVVYEz1sEKvof5EuxjoPvzpcRvrdp9C2gGMx6cpOHBmbImMesds7BZubwMVDTfXDnQ3vQfK7AC8wLfExMX5whyQc3q2OEnjGm5vE76SQxsfBLr77a7CNf+n0r/l6sSMtsBSnurckiIILCobAtVZhpF4gZF4jubaymj4Ch/fd380LE7bAnjc0NPxk2yqpmEuwGxF0ag+0k5uTpzZeBeaazvj0We8fXojainsb2xh2BZgbe0gSIllzSIUh63wfQ6dZ/O2fbjcKlOj58jJ3cVENESw5yErc9nf2MLQ4jwQAkV1Lqiq37/cZ9WaahJjF9AcmxiPDhLs7ePe23oOnmUwg2hSShQle96tKDjA2HAniusgo9FxnvY9Jxw7RWzGYy92QghM00x5g53qp9sHmtB58/o2umOI2NwGolMnMYUHIb7aAyiKwsjICLqu2/qBEIKUUAohMaSHSLyBSMoPTINQ6CX5+fn2AEVFRZSUlBCPx4nFYhl3L4RESjF/GEgX3pSj+Xw+/H7/b3U/AEOZFnp7O5+5AAAAAElFTkSuQmCC)}
+		ul {list-style-image: none}
+		/* ul rule needed to reset style for sub-bullets */
+	</style>
+	
+	<!-- resaltado de sintaxis -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	<!-- and it's easy to individually load additional languages -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script -->
+
+
+</head>
+<body>
+    <form>
+    <input type="button" id="btnAmpliar" value="Ampliar margen">
+    <input type="button" id="btnReducir" value="Reducir margen">
+    <input type="button" id="btnSumario" value="Ver/ocultar sumario">
+    </form>
+
+
+<div id="sumario" style="display:none">
+<h1>Sumario</h1>
+<!-- Sumario --> 
+            <a href="#h1">8 Bases de datos y ficheros</a> <br>
+            <a href="#h2">8a - Ficheros</a> <br>
+            &nbsp; &nbsp; <a href="#h3">Leer y escribir</a> <br>
+            &nbsp; &nbsp; <a href="#h4">Otras órdenes</a> <br>
+            &nbsp; &nbsp; <a href="#h5">Ejercicios</a> <br>
+</div>
+<!-- Sumario -->
+
+
+<div id="contenido">
+
+<!-- contenido -->
+			<h1 id="h1">8 Bases de datos y ficheros</h1>
+			<p>
+Prácticamente cualquier aplicación que vayamos a utilizar necesitará almacenar algún tipo de información de manera permanente. Esto se puede lograr mediante el uso de ficheros o bien, más convenientemente, usando una base de datos.
+</p>
+<br>
+<br>
+
+			<h1 id="h2">8a - Ficheros</h1>
+			<p>
+Para usar ficheros en PHP lo primero será abrir el fichero en el modo que necesitemos, luego manipularemos la información (escribir o leer) y finalmente cerraremos el fichero.
+</p>
+<br>
+<p>
+Por ejemplo, supongamos que tenemos un fichero llamado <tt>datos.txt</tt> que contiene varias líneas de datos que queremos leer.
+</p>
+<pre>
+$fichero = fopen('datos.txt', 'r') or die('Error al acceder al fichero.');
+$contenido = fread($fichero, filesize('datos.txt') );
+echo '&lt;pre&gt;' . $contenido . '&lt;/pre&gt;';
+fclose($fichero);
+</pre>
+<br>
+<br>
+<p>
+La función <tt>die()</tt> hará que se termine el <i>script</i> inmediatamente mostrando el mensaje de error que se indica si no se puede acceder al fichero (porque no existe, porque no se tiene permisos, etc.), lo cual no es muy elegante.
+</p>
+<br>
+<p>
+Otra opción podría ser impedir que se muestre el <i>warning</i> que se mostrará si no se puede acceder al fichero (lo hacemos con la <tt>@</tt>) y a cambio hacer nosotros mismos la comprobación.<br>
+<b>Nota</b>: Si queremos, podemos recuperar el mensaje con un <tt>error_get_last()['message']</tt>
+</p>
+<br>
+<pre>
+$fichero = @fopen('datos.txt', 'rb'); 
+if ( $fichero ){
+	$contenido = fread($fichero, filesize('datos.txt') );
+	echo '&lt;pre&gt;' . $contenido . '&lt;/pre&gt;';
+	fclose($fichero);
+}else{
+	echo '&lt;p&gt;Error al acceder al fichero datos.txt&lt;/p&gt;';
+	echo '&lt;p&gt;Mensaje de error: ' . error_get_last()['message'] . '&lt;/p&gt;';
+}
+</pre>
+<br>
+<br>
+<p>
+La función <tt>fopen()</tt> recibe dos parámetros: la ruta del fichero a utilizar y el modo en que se va a abrir. Devuelve un descriptor de fichero.
+</p>
+<ul style='padding-left: 30pt'>
+<li>En Windows si la ruta debe contiene una contrabarra, ésta tendrá que ser doble porque es el caracter de escape, por ejemplo: <tt>c:\\hola\\caracola.txt</tt></li>
+<li>La ruta puede ser relativa o absoluta</li>
+<li>El modo puede ser:
+<ul>
+<li><tt>r</tt> : sólo lectura. Coloca el cursor al inicio</li>
+<li><tt>r+</tt> : lectura y escritura. Coloca el cursor al inicio</li>
+<li><tt>w</tt> : sólo escritura. Si el fichero existe lo sobreescribe, si no existe se intenta crear. Coloca el cursor al inicio</li>
+<li><tt>w+</tt> : lectura y escritura. Si el fichero existe lo sobreescribe, si no existe se intenta crear. Coloca el cursor al inicio</li>
+<li><tt>a</tt> : sólo escritura. Añadirá información al final del fichero. La <tt>a</tt> es de <i>append</i>. Coloca el cursor al final</li>
+<li><tt>a+</tt> : lectura y escritura. Añadirá información al final del fichero. Coloca el cursor al final</li>
+</ul></li>
+</ul>
+<br>
+<p>
+<b>Importante</b>: Cada sistema operativo utiliza símbolos diferentes para representar una nueva línea y retorno de carro. Siempre que sea posible, se recomienda <b>guardar ficheros y leerlos usando formato binario</b> y no en modo texto. Se recomienda utilizar <tt>b</tt> (<i>binary</i>) unido al modo para que se use en formato binario, de manera que se eviten los problemas de los retorno de carro en los diferentes sistemas operativos (<tt>\n</tt> en Linux, <tt>\r</tt> en Mac y <tt>\r\n</tt> en Windows). Este modo es más portable. Por ejemplo: <tt>rb+</tt><br>
+Evidentemente, si tenemos que leer un fichero no creado por nosotros, no tendremos más remedio que utilizar los símbolos de cada sistema operativo.
+</p>
+<br>
+<p>
+<b>Muy importante</b>: Para que Apache pueda crear ficheros y directorios sin tener problemas de permisos, debemos cambiar el propietario y el grupo propietario de los ficheros y directorios en los que queremos que pueda escribir. Como mínimo, debemos cambiar el grupo propietario del directorio actual para que sea <tt>www-data</tt> (el grupo de apache). Para ello, en el directorio donde queramos que apache pueda escribir ejecutaremos <tt>chown :www-data .</tt><br>
+De hecho los ficheros que se crearán pertenecerán al usuario <tt>www-data</tt> y al grupo <tt>www-data</tt>.
+</p>
+<br>
+
+			<h2 id="h3">Leer y escribir</h2>
+			<p>
+Se puede leer de un fichero con las órdenes:
+</p>
+<ul style='padding-left: 30pt'>
+<li><tt>fgets( $fichero )</tt> : lee una línea de un fichero. Combinándolo con un bucle podemos leer línea a línea</li>
+<li><tt>fread( $fichero, $tamaño )</tt> : lee <tt>$tamaño</tt> bytes del fichero. La función <tt>filesize($fichero)</tt> devuelve el tamaño de un fichero</li>
+<li><tt>feof( $fichero )</tt> : indica si se ha llegado al final del fichero</li>
+<li><tt>fgetc( $fichero )</tt> : lee un caracter</li>
+<li><tt>fwrite($fichero, "Hola caracola\n" )</tt> : escribe en el fichero la cadena que se pase como parámetro</li>
+</ul>
+<br>
+<p>
+<b>Ejemplo</b>: leer un fichero línea a línea.
+</p>
+<pre>
+$fichero = @fopen('datos.txt', 'rb');
+if ( $fichero ){
+	while(!feof($fichero)) {
+		$contenido = fgets($fichero );
+		echo '&lt;pre&gt;' . $contenido . '&lt;/pre&gt;';
+	}
+	fclose($fichero);
+}else{
+	echo '&lt;p&gt;Error al acceder al fichero datos.txt&lt;/p&gt;';
+}
+</pre>
+<br>
+<br>
+
+			<h2 id="h4">Otras órdenes</h2>
+			<ul style='padding-left: 30pt'>
+<li><tt>touch( $fichero )</tt> : crea un fichero vacío con el nombre indicado</li>
+<li><tt>file_exists( $ficheroodirectorio )</tt> : comprueba si existe el fichero o directorio indicado</li>
+<li><tt>mkdir( $directorio )</tt> : crea el directorio indicado. Se puede indicar un segundo parámetro entero con los permisos, por defecto es <tt>0777</tt></li>
+<li><tt>rmdir( $directorio )</tt> : elimina el directorio indicado</li>
+<li><tt>file_put_contents( $fichero, $datos )</tt> : escribe datos en el fichero (equivale a un <tt>fopen()</tt>, <tt>fwrite()</tt> y <tt>fclose()</tt>). Como tercer parámetro se puede indicar la constante <tt>FILE_APPEND</tt> para que se añadan datos en vez de sobreescribir el fichero. Devuelve el nº de bytes escritos o <tt>false</tt> si no se pudo escribir (<b>Importante</b>: comprobarlo con <tt>===</tt>, 0 bytes escritos también equivale a <tt>false</tt>).</li>
+<li><tt>file_get_contents( $fichero )</tt> : lee el contenido del fichero (equivale a un <tt>fopen()</tt>, <tt>fread()</tt> y <tt>fclose()</tt>). Si devuelve <tt>false</tt> es que se produjo un error (<b>Importante</b>: comprobarlo con <tt>===</tt>, 0 bytes escritos también equivale a <tt>false</tt>).</li>
+</ul>
+<br>
+<br>
+
+			<h2 id="h5">Ejercicios</h2>
+			<p>
+<b>Ejercicio 1</b>: Crea el siguiente árbol de directorios a mano:
+</p>
+<pre>
+.
+├── php
+└── public/
+ 	    ├── css/
+ 	    └── js/
+</pre>
+<br>
+<p>
+Dentro del directorio llamado <tt>php</tt> crea un fichero llamado <tt>directorios.php</tt>. Los ficheros CSS  de tu proyecto irán dentro del directorio <tt>css</tt>, los ficheros Javascript dentro del directorio <tt>js</tt> y los ficheros del lado del servidor en el directorio <tt>php</tt>.
+</p>
+<br>
+<p>
+Crea un fichero <tt>index.php</tt> en la raíz del proyecto que presentará una página con un formulario y un botón, al pulsar el botón se generará una llamada (si quieres puedes hacer que sea una llamada AJAX) que gestionará el fichero <tt>servidor.php</tt> que creará un directorio llamado <tt>basedatos</tt> y dentro un fichero vacío llamado <tt>bd.sqlite</tt>.
+</p>
+<br>
+<p>
+El proyecto quedará una vez pulsado el botón así: 
+</p>
+<pre>
+.
+├── index.php
+├── php
+│    └── servidor.php
+├── public/
+│	    ├── css/
+│	    └── js/
+└── basedatos/
+	    └── bd.sqlite
+</pre>
+<br>
+<p>
+Si se vuelve a pulsar el botón <b>no se deben volver a crear los directorios ni ficheros</b> que ya existen.
+</p>
+<br>
+<p>
+Posible solución:
+</p>
+<pre>
+require( 'config.php');
+
+$exito = mkdir( '../basedatos' );
+if(!$exito){
+	responderError('&lt;p&gt;Error al crear el directorio basedatos. El directorio ya existe o no se tienen permisos para crearlo.&lt;/p&gt;&lt;p&gt;Mensaje: ' . error_get_last()['message'] . '&lt;/p&gt;');
+}
+
+$exito = touch( '../basedatos/bd.sqlite' );
+if(!$exito){
+	responderError('Error al crear el fichero bd.sqlite&lt;/p&gt;&lt;p&gt;Mensaje: ' . error_get_last()['message'] . '&lt;/p&gt;');
+}
+
+responder('&lt;p&gt;Completada la creación de ficheros y directorios.&lt;/p&gt;');
+</pre>
+<br>
+<br>
+<p>
+El fichero <tt>config.php</tt> contiene básicamente esto:
+</p>
+<pre>
+&lt;?php
+
+function responderError( $datos ){
+	$respuesta["error"] = true;
+	$respuesta["datos"] = $datos;
+
+  //mandamos la respuesta
+  echo json_encode($respuesta);
+  
+  exit(1);
+}
+
+
+function responder( $datos ){
+	$respuesta["error"] = false;
+	$respuesta["datos"] = $datos;
+
+  //mandamos la respuesta
+  echo json_encode($respuesta);
+  
+  exit(0);
+}
+
+/* ERROR REPORTING */
+//Indica que sólo se mostrarán errores, no Warnings ni otros errores. 
+//Valores posibles: E_ERROR | E_WARNING | E_PARSE | E_NOTICE
+error_reporting(E_ERROR);
+</pre>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!-- Wiki content -->
+
+<!--
+Lo separo con espacios entre el [ y el % para que no genere de nuevo el contenido
+[ % FOR page IN pages % ]
+	[ % page.content % ]
+[ % END % ]
+-->
+<!-- End wiki content -->
+
+</div>
+
+<div id="volver">
+    <a href="#">⬆️</a>
+</div>
+
+    <script defer>
+    let ancho=90;
+    btnAmpliar.addEventListener('click', e=>{
+        ancho+=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    btnReducir.addEventListener('click', e=>{
+        ancho-=12;
+        document.querySelector("#contenido").style.maxWidth = ancho+'ch';
+        document.querySelector("#sumario").style.maxWidth = ancho+'ch';
+    });
+    
+    let sumarioOculto = true;
+    btnSumario.addEventListener('click', e=>{
+        sumarioOculto = !sumarioOculto;
+        if(sumarioOculto)document.querySelector("#sumario").style.display='none';
+        else document.querySelector("#sumario").style.display='block'
+    });
+    
+    
+    //Resaltado de sintaxis
+    // first, find all the div.code blocks
+	document.querySelectorAll('div.zim-object pre code').forEach(el => {
+		//el lenguaje de programación aparece el primero en la classlist
+		let lang = el.classList[0];
+  		// then highlight each
+  		hljs.highlightElement(el,{language: lang});
+	});
+
+
+	//recorremos cada botón para el código que se ha generado.
+	//el botón tiene un padre con el código (que es hermano del botón).
+	document.querySelectorAll( "input.codigoboton").forEach( el =>{
+	   let elemcodigo = el.parentElement.firstElementChild;
+	   let resultado = el.parentElement.firstElementChild.nextElementSibling;
+		el.addEventListener('click', e=>{ eval(elemcodigo.innerText); });
+	});
+   </script>
+   <div id="pie">
+   <p>Javier Mancera Fernández<br>
+   <a href="https://www.twitch.tv/profesorinfo">https://www.twitch.tv/profesorinfo</a></p>
+   </div>
+</body>
+
+</html>
