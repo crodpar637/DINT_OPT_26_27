@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>UD 5 - Registro de eventos</title>
+</head>
+
+<body>
+<input type="button" value="Aceptar 1" onclick="manejador1();">
+<input type="button" value="Aceptar 2" onclick="borrarEvento();">
+
+
+<script type="application/javascript">
+
+function manejador1(){
+	console.log("manejador1");
+}
+
+function manejador2(){
+	console.log("manejador2");
+}
+
+function manejador3(oEvento){
+
+	alert("Objeto del evento:" + oEvento);
+	console.log("manejador3");
+}
+
+function manejador4(){
+	console.log("manejador4");
+}
+
+function borrarEvento(){
+	oBoton.onclick = null;	
+}
+// Registro de evento metodo tradicional
+// Sobreescribe el manejador de eventos en linea
+var oBoton = document.getElementsByTagName("input")[0];
+
+oBoton.onclick = manejador2;
+
+//Registro avanzado de evento
+
+oBoton.addEventListener("click",manejador3,false);
+// Se asume que el tercer parametro es false
+oBoton.addEventListener("click",manejador4);
+// Con un manejador que es una funcion anonima
+oBoton.addEventListener("click",function(){console.log("Hola");});
+
+// Eliminar registro de evento avanzado
+oBoton.removeEventListener("click", manejador4,false);
+
+
+
+</script>
+</body>
+
+</html>

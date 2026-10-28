@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>P.O.O.</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        ////////////////////////////////////////////////////////////////
+        // Constructor de atributos
+        function Coche(sColor, iPuertas, iConsumo) {
+            this.color = sColor;
+            this.puertas = iPuertas;
+            this.consumo = iConsumo;
+        }
+
+        // Métodos
+        Coche.prototype.mostrarColor = function() {
+            console.log("mostrarColor(): " + this.color);
+        }
+
+        // Atributo compartido por prototype
+        // Equivale a static en Java
+        Coche.prototype.marca = "Seat";
+        ////////////////////////////////////////////////////////////////
+
+        let a = new Coche("rojo", 5, 10);
+        let b = new Coche("azul", 7, 8);
+
+        a.mostrarColor(); // rojo
+        b.mostrarColor(); // azul
+
+        Coche.prototype.marca = "renault"; // Este cambia el valor de la propiedad a ambos objetos
+        console.log("a.marca : " + a.marca);
+        console.log("b.marca : " + b.marca);
+
+        
+        //Creacion dinámica de propiedades en un objeto
+        //Sustituyendo a una propiedad de prototype
+        a.marca = "mercedes";
+        // Este reemplaza la propiedad comun por una especifica de este objeto
+        console.log("a.marca (atributo propio de a): " + a.marca);
+        console.log("b.marca (atributo de la clase - estático): " + b.marca);
+        
+        //Creando un atributo nuevo solo para este objeto
+        a.precio = 30000;
+        console.log("a.precio : " + a.precio);
+        console.log("b.precio : " + b.precio);
+        
+
+        //Creación dinamica de atributos estáticos a nivel de prototype
+        Coche.prototype.modelo = "Ibiza";
+        console.log("a.modelo : " + a.modelo);
+        console.log("b.modelo : " + b.modelo);
+       
+        //Creación dinamica de metodos a nivel de prototype
+        Coche.prototype.muestraModelo = function() {
+            console.log(this.modelo);
+        };
+
+        a.muestraModelo();
+        b.muestraModelo();
+        
+        //Sustituyendo a un metodo de prototype, pero solo para el objeto a
+        a.muestraModelo = function() {
+            console.log("Muhahaha, versión propia del método");
+        };
+
+        a.muestraModelo();
+        b.muestraModelo();
+        
+        // Herencia
+        function Ranchera(sColor, iPuertas, iConsumo, iLongitud) {
+            // Llamada al constructor de la superclase
+            //	Coche.call(this,sColor, iPuertas, iConsumo);
+            Coche.apply(this, [sColor, iPuertas, iConsumo]);
+            this.longitud = iLongitud;
+        }
+        // Herencia
+        Ranchera.prototype = Object.create(Coche.prototype);
+        Ranchera.prototype.constructor = Ranchera;
+
+        let r = new Ranchera("verde", 7, 12, 520);
+
+        r.mostrarColor();
+    </script>
+
+</body>
+
+</html>

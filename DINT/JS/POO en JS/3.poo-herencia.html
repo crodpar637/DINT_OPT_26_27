@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>POO 3 - Herencia</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+
+		/////////////////////////////////////////////////////////
+		// Objeto Poligono
+		function Poligono(iLados) {
+			this.lados = iLados;
+		};
+
+		Poligono.prototype.getArea = function () {
+			return 0;
+		};
+		/////////////////////////////////////////////////////////
+		// Objeto Triangulo
+		function Triangulo(iBase, iAltura) {
+			Poligono.call(this, 3);    // Llamada al constructor del objeto base
+			this.base = iBase;
+			this.altura = iAltura;
+		};
+
+		// Aqui es donde heredamos propiedades y metodos
+		Triangulo.prototype = Object.create(Poligono.prototype);
+		Triangulo.prototype.constructor = Triangulo;
+
+		// Triangulo.prototype = new Poligono(); Esto es antiguo   
+
+		Triangulo.prototype.getArea = function () {
+			return 0.5 * this.base * this.altura;
+		};
+
+		Triangulo.prototype.getAltura = function () {
+			return this.altura;
+		};
+		Triangulo.prototype.setAltura = function (alturaNueva) {
+			this.altura = alturaNueva;
+		};
+		////////////////////////////////////////////////////////
+
+		// Objeto Rectangulo
+		function Rectangulo(iAncho, iAlto) {
+			Poligono.call(this, 4);    // Llamada al constructor del objeto base
+			this.ancho = iAncho;
+			this.alto = iAlto;
+		};
+		// Aqui es donde heredamos propiedades y metodos
+		Rectangulo.prototype = Object.create(Poligono.prototype);
+		Rectangulo.prototype.constructor = Rectangulo;
+
+		// Rectangulo.prototype = new Poligono();   Esto es antiguo
+
+		Rectangulo.prototype.getArea = function () {
+			return this.ancho * this.alto;
+		};
+		////////////////////////////////////////////////////////////////
+		// Objeto Pentagono
+		function Pentagono(iApotema) {
+			//	Poligono.call(this,5);    // Llamada al constructor del objeto base
+			Poligono.apply(this, [5]); // Llamada al constructor del objeto base pasando array de parametros
+
+			this.apotema = iApotema;
+		};
+		// Aqui es donde heredamos propiedades y metodos
+		Pentagono.prototype = Object.create(Poligono.prototype);
+		Pentagono.prototype.constructor = Pentagono
+		///////////////////////
+		var p = new Pentagono(200);
+		console.log("Apotema : " + p.apotema);
+		console.log("Lados : " + p.lados);
+		console.log("getArea : " + p.getArea());
+
+
+		var t = new Triangulo(20, 30);
+
+		console.log("Base : " + t.base);
+		console.log("Altura : " + t.altura);
+		console.log("Lados : " + t.lados);
+		console.log("t.getArea : " + t.getArea());
+
+		var r = new Rectangulo(10, 5);
+
+		console.log("Ancho : " + r.ancho);
+		console.log("Alto : " + r.alto);
+		console.log("Lados : " + r.lados);
+		console.log("r.getArea : " + r.getArea());
+
+
+	</script>
+
+
+
+</body>
+
+</html>

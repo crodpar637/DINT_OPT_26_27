@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Sin título 2</title>
+<script type="text/javascript">
+function muestraInformacion(mensaje,sCapa) {
+	document.getElementById(sCapa).innerHTML = '<h1>'+mensaje[0]+'</h1>';
+	for(var i=1; i<mensaje.length; i++) {
+		document.getElementById(sCapa).innerHTML += '<p>'+mensaje[i]+'</p>';
+	}
+}
+
+//Definimos los manejadores de evento
+function raton(oE){
+	var oEvento = oE || window.event;
+
+	var mensaje = new Array();
+	
+	mensaje[0] = 'Raton';
+	mensaje[1] = 'Pantalla [' + oEvento.screenX + ',' + oEvento.screenY + ']';
+	mensaje[2] = 'Página [' + oEvento.pageX + ',' + oEvento.pageY + ']';
+	mensaje[3] = 'Navegador [' + oEvento.clientX + ',' + oEvento.clientY + ']';
+
+	var sBotones = ["Izquierdo", "Rueda","Derecho"];
+		
+	mensaje[4] = "Botón [ " + sBotones[oEvento.button] + "]";
+	
+	var sBotones2 = [0, "Izq", "Der", "Izq+Der","Rueda", "Rueda+Izq","Rueda+Der","Rueda+Izq+Der"];
+	
+	mensaje[5] = "Botones [ " + sBotones2[oEvento.buttons] + "]";
+
+	
+	muestraInformacion(mensaje,'raton');
+
+	var oDiv = document.getElementById('raton');
+	oDiv.style.backgroundColor = '#FFFFFF';
+
+	var oDiv2 = document.getElementById('teclado');
+	oDiv2.style.backgroundColor = '#FFFFFF'; 
+
+
+}
+
+function teclado(oE){
+	var oEvento = oE || window.event;
+
+	var mensaje = new Array();
+	
+	
+	mensaje[1] = 'Caracter [' + oEvento.key + ']';
+	mensaje[2] = 'Nombre tecla [' + oEvento.code + ']';
+	mensaje[3] = 'Código Tecla [' + oEvento.keyCode + ']';
+	
+		
+	if (oE.type == 'keypress'){
+		mensaje[0] = 'Teclado keypress';
+		mensaje[4] = 'N veces [' + i + ']';
+		muestraInformacion(mensaje,'teclado');	
+		i++;
+	}
+	else if (oE.type == 'keydown'){
+		mensaje[0] = 'Teclado keydown'
+		mensaje[4] = 'N veces [' + j + ']';
+		muestraInformacion(mensaje,'teclado2');			
+		j++;
+	}
+	else if (oE.type == 'keyup'){
+		mensaje[0] = 'Teclado keyup'
+		mensaje[4] = 'N veces [' + k + ']';
+		muestraInformacion(mensaje,'teclado3');			
+		k++;
+			
+	}
+		
+		
+	
+	/* var oDiv = document.getElementById('raton');
+	oDiv.style.backgroundColor = '#CCE6FF'; */
+
+	var oDiv2 = document.getElementById('teclado2');
+	oDiv2.style.backgroundColor = '#CCE6FF'; 
+
+
+}
+
+function clickRaton(){
+	var oDiv = document.getElementById('raton');
+	oDiv.style.backgroundColor = '#FFFFCC';
+
+/*	var oDiv2 = document.getElementById('teclado');
+	oDiv2.style.backgroundColor = '#FFFFCC'; */
+}
+	
+//Asociamos los manejadores de eventos
+document.addEventListener("mousedown",raton,false);
+document.addEventListener("mousedown",clickRaton,false);
+document.onkeypress = teclado;
+document.onkeydown = teclado;
+document.onkeyup = teclado;
+
+
+var i = 1,k = 1, j=1 ;
+
+</script>
+<style type="text/css">
+
+div {
+	height:300px;
+	width:200px;
+	border:thin black solid;
+	float:left;
+	margin:20px;
+	boder-width
+}
+
+h1{
+	text-align:center;
+}
+
+p {
+	
+	margin:10px;
+}
+</style>
+
+</head>
+
+<body>
+<div id="raton"></div>
+<div id="teclado"></div>
+<div id="teclado2"></div>
+<div id="teclado3"></div>
+</body>
+
+</html>

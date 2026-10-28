@@ -1,0 +1,1 @@
+<form action='./php/servidor.php' method='GET'><input type='submit' name='aceptar' value='aceptar'></form>

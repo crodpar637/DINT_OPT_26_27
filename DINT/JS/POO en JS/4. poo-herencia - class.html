@@ -1,0 +1,124 @@
+﻿ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>POO 3 - Herencia</title>
+</head>
+
+<body>
+<script type="text/javascript">
+
+/////////////////////////////////////////////////////////
+// Objeto Poligono
+class Poligono {
+	#lados; //  atributo privado
+	constructor(iLados){
+		this.#lados= iLados;  // Atributo this.lados
+	}
+	
+	get area() {    //  Propiedad, se comporta como un atributo de solo lectura
+		return 0;
+	}
+	get lados(){					// console.log(p.lados()); NOOOOOO
+		return this.#lados;			// console.log(p.lados); YES
+	}
+	set lados(value){                 // p.lados(8); NOOOOOO
+ 		this.#lados = value;		  // p.lados = 8; YES
+	}
+}
+/////////////////////////////////////////////////////////
+// Objeto Triangulo
+class Triangulo extends Poligono {   // extends para herencia
+	#base;
+	#altura;   // Atributos privados
+	constructor(iBase, iAltura){
+		super(3);				// Llamada al constructor de la clasd base
+		this.#base = iBase;
+		this.#altura = iAltura;
+	}
+
+	get area(){
+		return 0.5 * this.base * this.altura;
+	}
+
+	get base(){
+		return this.#base;
+	}
+
+	set base(valorNuevo){
+		// alert("esto es una propiedad");
+		this.#base = valorNuevo;
+	}
+
+	get altura(){
+		return this.#altura;
+	}
+}
+/////////////////////////////////////////////////////////
+
+// Objeto Rectangulo
+class Rectangulo extends Poligono{
+	#ancho;
+	#alto;
+	constructor(iAncho, iAlto){
+		super(4);    // Llamada al constructor del objeto base
+		this.#ancho = iAncho;
+		this.#alto = iAlto;
+	}
+	
+	get area(){
+		return this.#ancho * this.#alto;
+	}
+	get ancho(){
+		return this.#ancho;
+	}
+	get alto(){
+		return this.#alto;
+	}
+	
+}  
+////////////////////////////////////////////////////////////////
+// Objeto Pentagono
+class Pentagono extends Poligono{
+	#apotema;
+	constructor(iApotema){
+		super(5);
+		this.#apotema = iApotema;
+	};
+
+	get apotema(){
+		return this.#apotema;
+	}
+}
+
+///////////////////////
+var p = new Pentagono(200);
+console.log("Apotema : " + p.apotema );
+console.log("Lados : " + p.lados );
+console.log("getArea : " + p.area );
+
+
+var t = new Triangulo(20, 30);
+
+console.log("Base : " + t.base );
+console.log("Altura : " + t.altura );
+console.log("Lados : " + t.lados );
+console.log("t.getArea : " + t.area );
+
+var r = new Rectangulo(10, 5);
+
+console.log("Ancho : " + r.ancho );
+console.log("Alto : " + r.alto );
+console.log("Lados : " + r.lados );
+console.log("r.getArea : " + r.area );
+
+
+</script>
+
+
+
+</body>
+
+</html>

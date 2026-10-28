@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.body.addEventListener("keydown",tecla);
+
+        function tecla(oE){
+            let oEvento = oE || window.event;
+            
+            // key --> Caracter imprimible
+            console.log("oEvento.key:" + oEvento.key);
+            
+            // charCode --> Código caracter Unicode
+            console.log("oEvento.charCode:" + oEvento.charCode);
+            console.log("String.fromCharCode(oEvento.charCode):" + String.fromCharCode(oEvento.charCode));
+
+            // code --> Nombre de la tecla
+            console.log("oEvento.code:" + oEvento.code);
+            console.log("--------------------------------------");
+
+        }
+
+    </script>
+</body>
+</html>

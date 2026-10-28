@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>UD5 - Eventos de teclado</title>
+</head>
+
+<body>
+
+    <form name="formu">
+        <input type="text" name="txtTexto" id="txtTexto" />
+    </form>
+
+    <div>
+        <h3>Keydown -Se repite con cualquier tecla</h3>
+        <p id="keydown"></p>
+    </div>
+    <div>
+        <h3>Keypress - Solo se repite con caracteres imprimibles</h3>
+        <p id="keypress"></p>
+    </div>
+    <div>
+        <h3>Keyup</h3>
+        <p id="keyup"></p>
+    </div>
+
+
+    <script type="text/javascript">
+        formu.txtTexto.addEventListener("keydown", teclaAbajo);
+        formu.txtTexto.addEventListener("keypress", teclaPresionada);
+        formu.txtTexto.addEventListener("keyup", teclaArriba);
+
+        var oParrafoKeydown = document.getElementById("keydown");
+        var oParrafoKeypress = document.getElementById("keypress");
+        var oParrafoKeyup = document.getElementById("keyup");
+
+        var i = 0,
+            j = 0,
+            k = 0;
+
+        //Evento keydown
+        function teclaAbajo(oEvento) {
+
+            var oE = oEvento || window.event;
+            i++;
+
+            oParrafoKeydown.innerHTML  = "<br> Código de caracter con charCode: " + oE.charCode;
+            oParrafoKeydown.innerHTML += "<br> Caracter con String.fromCharCode(oE.charCode): " + String.fromCharCode(oE.charCode);
+            oParrafoKeydown.innerHTML += "<br> Caracter con oE.key (TODOS): " + oE.key;
+            oParrafoKeydown.innerHTML += "<br> Código de tecla con oE.which: " + oE.which;
+            oParrafoKeydown.innerHTML += "<br> Código de tecla con keyCode: " + oE.keyCode;
+            oParrafoKeydown.innerHTML += "<br> Código de tecla con code (TODOS): " + oE.code;
+            
+            oParrafoKeydown.innerHTML += " <br><br> Repeticiones - i: " + i;
+            
+        }
+
+        // Evento keypress
+        function teclaPresionada(oEvento) {
+            var oE = oEvento || window.event;
+            j++;
+            
+            oParrafoKeypress.innerHTML  = "<br> Código de caracter con charCode: " + oE.charCode;
+            oParrafoKeypress.innerHTML += "<br> Caracter con String.fromCharCode(oE.charCode): " + String.fromCharCode(oE.charCode);
+            oParrafoKeypress.innerHTML += "<br> Caracter con oE.key (IMPRIMIBLES): " + oE.key;
+            oParrafoKeypress.innerHTML += "<br> Caracter con String.fromCharCode(oE.which): " + String.fromCharCode(oE.which);
+            oParrafoKeypress.innerHTML += "<br> Código de tecla con keyCode: " + oE.keyCode;
+            oParrafoKeypress.innerHTML += "<br> Código de tecla con code (IMPRIMIBLES): " + oE.code;
+            oParrafoKeypress.innerHTML += "<br><br> Repeticiones - j: "  + j;
+        }
+
+        //Evento keyup
+        function teclaArriba(oEvento) {
+            var oE = oEvento || window.event;
+            k++;
+
+            oParrafoKeyup.innerHTML  = "<br> Código de caracter con charCode: " + oE.charCode;
+            oParrafoKeyup.innerHTML += "<br> Caracter con String.fromCharCode(oE.charCode): " + String.fromCharCode(oE.charCode);
+            oParrafoKeyup.innerHTML += "<br> Caracter con oE.key (TODOS): " + oE.key;
+            oParrafoKeyup.innerHTML += "<br> Código de tecla con oE.which: " + oE.which;
+            oParrafoKeyup.innerHTML += "<br> Código de tecla con keyCode: " + oE.keyCode;
+            oParrafoKeyup.innerHTML += "<br> Código de tecla con code (TODOS): " + oE.code;
+            
+            oParrafoKeyup.innerHTML += "<br><br> Repeticiones - k: " + k;
+            
+
+            
+        }
+    </script>
+</body>
+
+</html>

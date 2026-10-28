@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <title>Sin título 1</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    /*
+    function Animal(nombre, edad){
+        this.nombre = nombre;
+        this._edad = edad;
+    }
+    
+    Animal.prototype.getEdad = function(){
+      return this._edad;
+    }
+    
+    Animal.prototype.setEdad = function(valor){
+      this._edad = valor;
+    }
+    
+    Animal.prototype.hablar = function(){
+      console.log(this.nombre + ' hace un ruido.');
+    }
+    
+    function Perro(nombre,edad,chip){
+      Animal.call(this,nombre,edad); // Equivale a llamar al constructor de la clase base
+      this.chip = chip;
+    }
+    
+    // Aqui es donde heredamos propiedades y metodos
+    Perro.prototype = Object.create(Animal.prototype);
+    Perro.prototype.constructor = Perro;
+    
+    Perro.prototype.hablar = function(){
+      console.log(this.nombre + ' ladra.');
+    }
+    */
+
+
+    class Animal {
+      #edad;
+      constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.#edad = edad;
+      }
+
+      get edad() {
+        return this.#edad;
+      }
+
+      set edad(valor) {
+        this.#edad = valor;
+      }
+
+      hablar() {
+        console.log(this.nombre + ' hace un ruido.');
+      }
+    }
+
+    class Perro extends Animal {
+      #chip;
+      constructor(nombre, edad, chip) {
+        super(nombre, edad);
+        this.#chip = chip;
+      }
+
+      hablar() {
+        console.log(this.nombre + ' ladra.');
+      }
+    }
+
+    var oA = new Animal("rambo", 10);
+    var oP = new Perro("rocky", 8, 333);
+
+    oA.hablar();
+
+    oP.hablar();
+    
+    console.log("Edad de " + oA.nombre + " " + oA.edad);
+    console.log("Edad de " + oP.nombre + " " + oP.edad);
+    oA.edad = 3;
+    console.log("Edad de " + oA.nombre + " " + oA.edad);
+    
+    // Clases declaradas como funciones 
+    // console.log("Edad de " + oA.nombre + " " + oA.getEdad());
+    // console.log("Edad de " + oP.nombre + " " + oP.getEdad());
+    // oA.setEdad(3);
+    // console.log("Edad de " + oA.nombre + " " + oA.getEdad());
+
+
+  </script>
+</body>
+
+</html>

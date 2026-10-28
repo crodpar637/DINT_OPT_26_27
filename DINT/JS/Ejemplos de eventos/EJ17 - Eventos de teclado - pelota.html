@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>UD5 - Eventos de teclado - pelota</title>
+    <style>
+        .pelota {
+            width: 10px;
+            height: 10px;
+            border: 1px black solid;
+            background-color: red;
+            border-radius: 50%;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pelota" class="pelota"></div>
+
+    <script type="text/javascript">
+        document.addEventListener("keydown", tecla);
+
+        var oPelota = document.getElementById("pelota");
+        iTop = 0;
+        iLeft = 0;
+
+        function tecla(oEvento) {
+            var oE = oEvento || window.event;
+        /* Antes de la propiedad code
+            if (oE.keyCode == 40) // abajo
+                iTop += 5;
+            if (oE.keyCode == 38) // arriba
+                iTop -= 5;
+            if (oE.keyCode == 37) // izquierda
+                iLeft -= 5;
+            if (oE.keyCode == 39) // derecha
+                iLeft += 5;
+        */
+            if (oE.code == "ArrowDown" && (iTop+12) < window.innerHeight) // abajo
+                iTop += 5;
+            if (oE.code == "ArrowUp" && iTop > 0) // arriba
+                iTop -= 5;
+            if (oE.code == "ArrowLeft" && iLeft > 0) // izquierda
+                iLeft -= 5;
+            if (oE.code == "ArrowRight" && (iLeft+12) < window.innerWidth) // derecha
+                iLeft += 5;
+
+            oPelota.style.top = iTop + "px";
+            oPelota.style.left = iLeft + "px";
+        }
+    </script>
+</body>
+
+</html>

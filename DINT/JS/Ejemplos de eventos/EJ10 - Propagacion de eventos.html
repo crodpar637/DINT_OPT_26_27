@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Sin título 1</title>
+</head>
+
+<body id="body1">
+
+    <div id="capa">
+
+        <span id="parrafo">Texto</span>
+
+    </div>
+
+    <script type="application/javascript">
+        function f1(oEvento) {
+            // Por compatibilidad de navegadores
+            var oE = oEvento || windows.event;
+
+            console.log("body - 1 - captura - " + oE.eventPhase);
+
+            //console.log("oE.currentTarget.id " + oE.currentTarget.id);
+            //console.log("oE.target.id " + oE.target.id);
+
+
+        };
+
+        function f2(oEvento) {
+            var oE = oEvento || window.event;
+            console.log("div - 2 - captura - " + oE.eventPhase);
+        };
+
+        function f3(oEvento) {
+            var oE = oEvento || window.event;
+            console.log("p - 3 - captura" + oE.eventPhase);
+        };
+
+        function f4(oEvento) {
+            var oE = oEvento || window.event;
+            console.log("p - 4 - burbujeo - " + oE.eventPhase);
+        };
+
+        function f5(oEvento) {
+            var oE = oEvento || window.event;
+            console.log("div - 5 - burbujeo - " + oE.eventPhase);
+        };
+
+
+        function f6(oEvento) {
+            // Por compatibilidad de navegadores
+            var oE = oEvento || windows.event;
+
+            console.log("body - 6 - burbujeo -" + oE.eventPhase);
+        };
+
+
+        var oCapa = document.getElementById("capa");
+        var oParrafo = document.getElementById("parrafo");
+
+        // oParrafo.addEventListener("click", f4, false); // Burbujeo
+        // oParrafo.addEventListener("click", f3, true); // Captura
+
+        // document.body.addEventListener("click", f6, false); // Burbujeo
+        // document.body.addEventListener("click", f1, true); // Captura
+        
+        // oCapa.addEventListener("click", f2, true); // Captura
+        // oCapa.addEventListener("click", f5, false); // Burbujeo
+    
+        oCapa.addEventListener("click", f9, false); // Burbujeo
+        document.body.addEventListener("click", f9, false); // Burbujeo
+        oParrafo.addEventListener("click", f9, false); // Burbujeo
+        
+        function f9(oEvento) {
+
+            var oE =  oEvento || window.event;
+
+            console.log("f9 - oE.currentTarget.id " + oE.currentTarget.id);
+            console.log("f9 - oE.target.id " + oE.target.id);
+            console.log("f9 - *****************************");
+        }
+    </script>
+</body>
+
+</html>

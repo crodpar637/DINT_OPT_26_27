@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <style>
+        #capa { border: 1px solid black;
+                width: 100px;
+                height: 100px;}
+
+        .amarillo { background-color: yellow;}
+
+    </style>
+</head>
+
+<body>
+    <div id="capa">0</div>
+
+    <script>
+        "use strict";
+
+        var oCapa = document.getElementById("capa");
+
+        oCapa.addEventListener("mouseover", haEntrado, false);
+        oCapa.addEventListener("mouseout", haSalido, false);
+        oCapa.addEventListener("mousemove", seMueve, false);
+
+
+        function haEntrado(){
+            oCapa.classList.add("amarillo") ;
+            console.log("Ratón sobre la capa");
+        }
+        
+        function haSalido(){
+            oCapa.classList.remove("amarillo") ;
+            console.log("Ratón fuera de la capa");
+        }
+        
+        function seMueve(){
+            oCapa.textContent = parseInt(oCapa.textContent) + 1;
+            console.log("Ratón se mueve; contador: " + oCapa.textContent);
+        }
+
+    </script>    
+</body>
+
+</html>

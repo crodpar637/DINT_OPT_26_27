@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Cancelar accion por defecto</title>
+
+    <script type="text/javascript">
+    </script>
+
+</head>
+
+<body style="height:1000px;">
+    <form id="formu">
+        <label>Cuadro de texto donde no se pueden introducir números</label>
+        <input id="txtTexto" type="text"> </input>
+    </form>
+
+    <h2>Tampoco se puede obtener el menu contextual con el botón derecho del ratón</h2>
+
+    <div id="noCopiar">
+        Querido usuario,
+        El copiado está prohibida para ti.
+        Si sabes JS o HTML entonces puedes obtener todo de la fuente de la página.
+    </div>
+
+    <script type="text/javascript">
+        function validarSinNumeros(elEvento) {
+
+            var oEvento = elEvento || window.event; // Explicar esto
+            let caracter = oEvento.key;
+
+            if (caracter == "0" || caracter == "1" || caracter == "2" || caracter == "3" || caracter == "4" || caracter == "5" ||
+                caracter == "6" || caracter == "7" || caracter == "8" || caracter == "9") {
+                oEvento.preventDefault();
+            }
+
+        }
+
+
+        document.getElementById("txtTexto").addEventListener('keypress', validarSinNumeros, false); // Agregamos manejador evento
+
+
+
+        document.body.addEventListener("contextmenu",
+            function (oE) {
+                alert("Hey, hey");
+                var oEvento = oE || window.event;
+                oEvento.preventDefault();
+            }, false);
+
+        // oncopy="alert('¡Copiado prohibido!');return false" 
+        ///// En línea
+        document.querySelector("#noCopiar").addEventListener("copy", mensajeProhibicion,false);
+
+        function mensajeProhibicion(oEvento){
+            let oE = oEvento || window.event;
+            
+            alert('¡Copiado prohibido!');
+            oE.preventDefault();
+        }
+        
+    </script>
+
+
+</body>
+
+</html>

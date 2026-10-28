@@ -1,0 +1,15 @@
+- Apuntes en la pizarra
+
+- https://developer.mozilla.org/es/docs/Web/JavaScript/Introducci%C3%B3n_a_JavaScript_orientado_a_objetos
+- https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Details_of_the_Object_Model
+- Clases Ecmascript 2015
+https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Classes
+
+- Libro The Principles Of Object-Oriented JavaScript V413HAV.pdf
+
+- Capitulo de P.O.O. y Herencia en libro de N.Zakas
+
+	Combination Constructor/Prototype Pattern - 197-198
+	Combination Inheritance - 209
+
+- Ejemplos 1.Poo 2.Poo 3.Poo-herencia 4.Poo-ES6-Herencia

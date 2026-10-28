@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>UD5 - Eventos de raton - paint</title>
+
+    <style type="text/css">
+        .capa {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        var bPintar = false;
+
+        document.body.style.height = screen.height + "px";
+
+        document.body.addEventListener("mousemove", pintar);
+        document.body.addEventListener("mousedown", verificar);
+        document.body.addEventListener("mouseup", verificar);
+
+        function verificar(oE) {
+            var oEvento = oE || window.event;
+
+            if (oEvento.type == 'mousedown' && oEvento.button == 0)
+                bPintar = true;
+
+            if (oEvento.type == 'mouseup' && oEvento.button == 0)
+                bPintar = false;
+        }
+
+
+        function pintar(oE) {
+            var oEvento = oE || window.event;
+
+            if (bPintar == true) { // Botón izq pulsado
+
+                var sCapa = '<div style="top:' + oEvento.clientY + 'px;left:' + oEvento.clientX + 'px" class="capa">';
+
+                document.body.innerHTML += sCapa;
+            }
+        }
+    </script>
+</body>
+
+</html>

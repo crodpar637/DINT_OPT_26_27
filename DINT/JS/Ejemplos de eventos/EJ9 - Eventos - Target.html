@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>Sin título 1</title>
+	<style>
+		span {
+			color: red;
+		}
+	</style>
+</head>
+
+<body>
+	<p id="numeros"></p>
+
+	<div id="teclado">
+		<input type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<br />
+		<input type="button" value="4">
+		<input type="button" value="5">
+		<input type="button" value="6">
+		<br />
+		<input type="button" value="7">
+		<input type="button" value="8">
+		<input type="button" value="9">
+		<br />
+		<input type="button" value="0">
+	</div>
+
+	<div id="externo">
+		<h6 id="titulo">Ejemplo de target y <span id="span">current target</span></h6>
+	</div>
+
+	<script type="application/javascript">
+
+		var oCapaTeclado = document.getElementById("teclado");
+
+		oCapaTeclado.addEventListener("click", manejador, false);
+
+		function manejador(oEvento) {
+
+			var oE = oEvento || window.event;
+
+			var oNumeros = document.getElementById("numeros");
+
+			if (oE.target.value)  // <> de undefined => es un click en un botón
+				oNumeros.innerHTML += oE.target.value;
+
+			console.log("Target:" + oE.target);
+			console.log("currentTarget:" + oE.currentTarget);
+		}
+
+		let oCapaExterna = document.getElementById("externo");
+		let oH6 = document.querySelector("h6");
+		let oSpan = document.querySelector("span");
+
+		oCapaExterna.addEventListener("click", manejador2, true);
+		oH6.addEventListener("click", manejador2,true);
+		oSpan.addEventListener("click", manejador2, false);
+
+		function manejador2(oE) {
+			console.log("-----------------");
+			console.log("Target: ", oE.target, " -- id: ", oE.target.id);
+			console.log("currentTarget: ", oE.currentTarget, " -- id: ", oE.currentTarget.id);
+			console.log("###############");
+
+		}
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>JSON I</title>
+</head>
+
+
+<body>
+<div id="capa"></div>
+
+<script type="text/javascript">
+
+var oNuevo = { 	p1 : "Hola", 
+				p2 : 5,
+				p3 : { a : "adios" },
+				p4 : [ 3,4,5],
+				m1 : function () { return "noche"; }, // () => "noche"
+				m2 : x => x + 1
+			};
+			
+
+
+var oNuevo2 = oNuevo;  // oNuevo2 apunta al mismo objeto en memoria
+
+var oCapa = document.getElementById("capa");
+
+oCapa.innerHTML = "oNuevo.p1 " + oNuevo.p1 + "<br/>";
+oNuevo.p1 = "cambio en p1";
+oCapa.innerHTML += "oNuevo.p1 " + oNuevo.p1 + "<br/>";
+
+
+oCapa.innerHTML += "oNuevo.p2 " + oNuevo.p2 + "<br/>";
+oCapa.innerHTML += "oNuevo.p3.a " + oNuevo.p3.a + "<br/>";
+// Creación dinámica de atributo b en el objeto oNuevo.p3
+// el nuevo atributo contiene otro objeto { c: "otro objeto"}
+oNuevo.p3.b = { c : "otro objeto" };
+
+oCapa.innerHTML += "oNuevo.p3.b.c " + oNuevo.p3.b.c + "<br/>";
+
+
+oCapa.innerHTML += "oNuevo.p4[2] " + oNuevo.p4[2] + "<br/>";
+oNuevo.p4.push(true);
+oCapa.innerHTML += "oNuevo.p4.toString() " + oNuevo.p4.toString() + "<br/>";
+
+oCapa.innerHTML += "oNuevo.m1() " + oNuevo.m1() + "<br/>";
+			
+oCapa.innerHTML += "oNuevo.m2(7) " + oNuevo.m2(7) + "<br/>";			
+oCapa.innerHTML += "JSON.stringify(oNuevo) " + JSON.stringify(oNuevo) + "<br/>";
+oCapa.innerHTML += "===============================================<br/>";
+
+var sObjetoCadena = '{"p9" : 3, "p8" : [ 1,2,3]}';
+var oObjeto = JSON.parse(sObjetoCadena);
+
+oCapa.innerHTML += "oObjeto.p9 " + oObjeto.p9 + "<br/>";
+oCapa.innerHTML += "oObjeto.p8 " + oObjeto.p8 + "<br/>";
+
+
+
+</script>
+</body>
+
+</html>

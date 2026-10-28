@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>POO 2</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+	// Añado metodos a la clase Array de javascript
+	Array.prototype.enqueue = function (vItem) {
+					this.push(vItem);
+				};
+
+	Array.prototype.dequeue = function () {
+					return this.shift();
+				};
+				
+	// Almaceno la version original de toString para arrays
+	Array.prototype.originaltoString = Array.prototype.toString;
+	
+	// Redefinir un metodo existente	
+	Array.prototype.toString = function () { 
+			return "No hay nada que hacer";
+			};
+			
+	var a = new Array();
+	
+	a[0]=2;
+	a[1]=3;
+	
+	console.log(a.toString());
+	
+	// Restauro el metodo toString original			
+	Array.prototype.toString = Array.prototype.originaltoString;
+	
+	console.log(a.toString());
+	
+
+//////////////////////////////////////////////////////////////////////
+
+// Creacion de una "clase" a partir de otra --> Es herencia realmente
+function MiArray() { };
+
+// MiArray.prototype = new Array(); // obsoleto, forma antigua
+MiArray.prototype = Object.create(Array.prototype);
+MiArray.prototype.constructor = MiArray;
+
+//////////////////////////////////////////////////////////////////////
+
+var a = new MiArray();
+
+a.push(1);
+a.push(2);
+
+console.log(a.toString());
+console.log("========================");
+
+</script>
+
+
+</body>
+
+</html>

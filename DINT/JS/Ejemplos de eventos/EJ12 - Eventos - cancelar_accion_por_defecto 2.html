@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Cancelar accion por defecto</title>
+
+    <script type="text/javascript">
+        function nosVamos() {
+
+            var bSeguir = confirm("¿Nos vamos a google?");
+
+            return bSeguir;
+        }
+
+        function nosVamos2(elEvento) {
+
+            var e = elEvento || window.event // Explicar esto
+
+            var bSeguir = confirm("¿Nos vamos a yahoo?");
+
+            if (bSeguir == false)
+                e.preventDefault();
+
+            e.stopPropagation(); //Detener la propagación del evento (burbujeo)-
+
+        }
+
+        function nosVamos3(elEvento) {
+
+            var e = elEvento || window.event // Explicar esto
+
+            var bSeguir = confirm("¿Nos vamos a terra?");
+
+            if (bSeguir == false)
+                e.preventDefault();
+
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div id="capa">
+        <a href="http://www.google.es" onclick="return nosVamos();">Google</a>
+        <br/>
+        <a href="http://www.yahoo.es" onclick="nosVamos2(event);">Yahoo</a>
+        <br/>
+        <a id="terra" href="http://www.terra.es">Terra</a>
+    </div>
+    <br/><br/>
+    <form id="formu" action="http://www.google.es">
+
+        <input type="submit" value="Aceptar 1" onclick="return nosVamos();" />
+        <input type="submit" value="Aceptar 2" onclick="nosVamos2(event);" />
+        <input id="aceptar3" type="submit" value="Aceptar 3" />
+
+
+    </form>
+
+
+
+    <script type="text/javascript">
+        document.getElementById("terra").addEventListener('click', nosVamos3, false);
+        // Agregamos manejador evento
+
+
+      document.getElementById("capa").addEventListener('click', function() {
+            alert("evento")
+        }, false); // Agregamos manejador evento
+   
+        document.getElementById("aceptar3").addEventListener('click', nosVamos3, false); // Agregamos manejador evento
+
+
+        document.getElementById("capa").addEventListener('click',
+            function(oEvento) {
+                var oE = oEvento || window.event;
+                alert("evento en captura");
+                //oE.stopPropagation();
+            }, true); // Agregamos manejador evento en fase de captura
+    
+    </script>
+
+
+</body>
+
+</html>
