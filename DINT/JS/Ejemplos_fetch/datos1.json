@@ -1,0 +1,7 @@
+{
+  "saludo": "Hola mundo!",
+  "fecha": "2023-11-10",
+  "numero": 128,
+  "error": false,
+  "numeros" : [ 1, 2, 3]
+}

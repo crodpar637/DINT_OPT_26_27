@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <title>2.Pokeapi</title>
+</head>
+<body>
+    <h3>Pokeapi</h3>
+    <form name="frmConsultaPokemon" id="frmConsultaPokemon">
+        <label>Nombre/ID Pokemon</label>
+        <input  type="text" name="txtNombre" id="txtNombre">
+        <br>
+        <input type="button" name="btnPedirDatos" id="btnPedirDatos" value="Pedir Datos">
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+
+        frmConsultaPokemon.btnPedirDatos.addEventListener("click", traerDatos);
+
+        async function traerDatos() {
+            let oURL = new URL("https://pokeapi.co/api/v2/pokemon/" + frmConsultaPokemon.txtNombre.value.trim());
+
+            let respuestaServidor = await fetch( oURL, { method: "GET" });
+
+            // Si no es una respuesta OK
+            if (!respuestaServidor.ok) { 
+                console.error("Error al acceder al acceder al servidor (STATUS != 200..299).");
+                response = {
+                    ok: false,
+                    mensaje: "Error al acceder al acceder al servidor (STATUS != 200..299).",
+                    status: respuestaServidor.status,
+                    datos: null
+                };
+            } else {
+                // Si ha ido bien recojo los datos
+                response = {
+                    ok: true,
+                    mensaje: "OK",
+                    status: respuestaServidor.status,
+                    datos : await respuestaServidor.json() // await
+                };
+            }
+            
+            procesarRepuesta(response);
+        }
+
+
+        function procesarRepuesta(response) {
+            let salida = document.querySelector("#resultado");
+            if(response.ok) {
+                salida.innerHTML = "Nombre:" + response.datos.name + "<br>";
+                salida.innerHTML += "ID:" + response.datos.id + "<br>";
+                salida.innerHTML += "<img src='" + response.datos.sprites.front_default + "' /><br>";
+                salida.innerHTML += "<img src='" + response.datos.sprites.front_shiny + "' /><br>";
+            } else{
+                salida.innerHTML = response.mensaje + "<br>";
+                salida.innerHTML += response.status + "<br>";  
+            }
+        }
+    </script>
+</body>
+</html>

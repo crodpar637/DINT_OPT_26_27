@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBDD</title>
+</head>
+<body>
+    
+    <input type="button" name="btnPedirDatos" id="btnPedirDatos" value="Pedir Datos">
+    
+    <div id="resultado"></div>
+
+    <script>
+
+        document.querySelector("#btnPedirDatos").addEventListener("click", traerDatos);
+
+        async function traerDatos() {
+            // IMPORTANTE: Adaptar ruta
+            let oURL = new URL("http:/localhost/backend/get_personas.php");
+
+            let respuestaServidor = await fetch( oURL, { method: "GET" });
+
+            // Si no es una respuesta OK
+            if (!respuestaServidor.ok) { 
+                console.error("Error al acceder al acceder al servidor (STATUS != 200..299).");
+                response = {
+                    ok: false,
+                    mensaje: "Error al acceder al acceder al servidor (STATUS != 200..299).",
+                    status: respuestaServidor.status,
+                    datos: null
+                };
+            } else {
+                // Si ha ido bien recojo los datos
+                response = {
+                    ok: true,
+                    mensaje: "OK",
+                    status: respuestaServidor.status,
+                    datos : await respuestaServidor.json() // await
+                };
+            }
+            
+            procesarRepuesta(response);
+        }
+
+
+        function procesarRepuesta(response) {
+            let salida = document.querySelector("#resultado");
+            if(!response.ok) {
+                salida.innerHTML = response.mensaje + "<br>";
+                salida.innerHTML += response.status + "<br>";
+            } else{
+                
+                
+            }
+        }
+    </script>
+</body>
+</html>
