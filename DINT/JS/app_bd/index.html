@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<!-- Enlaces a bootstrap-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+		<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	
+	<title>Tienda informática</title>
+</head>
+
+<body class="ms-1">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#">Tienda de informática</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Productos
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" id="mnuAltaComponente">Alta de componente</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li><a class="dropdown-item" href="#" id="mnuBuscarComponente">Buscar un componente</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoComponente">Listado de componente</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoPorTipo">Listado de componente por tipo</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoPorPrecio">Listado de componente por precio</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Tipos de componentes
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" id="mnuAltaTipo">Alta de tipos de componentes</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item" href="#" id="mnuBuscarTipoNombre">Buscar tipos de componentes por nombre</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoTipo">Listado de tipos de componentes</a></li>
+					</ul>
+				</li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+	<div class="container mt-3" id="formularios" >
+		<div class="row">
+			<form class="form-horizontal d-none" name="frmListadoTipo" id="frmListadoTipo" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Listado de componentes por tipo</legend>
+					
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="lstTipo">Tipo</label>
+						<div class="col-xs-4">
+							<select  class="form-select" name="lstTipo" id="lstTipo">
+
+							</select>
+						</div>
+					</div>
+					
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarListadoPorTipo"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarListadoPorTipo" name="btnAceptarListadoPorTipo"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<form class="form-horizontal d-none" name="frmAltaTipo" id="frmAltaTipo" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Alta de tipo de componente</legend>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtTipo">Tipo</label>
+						<div class="col-xs-4">
+							<input id="txtTipo" name="txtTipo" placeholder="Nombre del tipo"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtDescripcion">Descripcion</label>
+						<div class="col-xs-4">
+							<input id="txtDescripcion" name="txtDescripcion" placeholder="Descripción del tipo" class="form-control input-md"
+								type="text">
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarAltaTipo"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarAltaTipo" name="btnAceptarAltaTipo"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<form class="form-horizontal d-none" name="frmBuscarComponente" id="frmBuscarComponente" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Buscar un componente</legend>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtIdComponente">Id Componente</label>
+						<div class="col-xs-4">
+							<input id="txtIdComponente" name="txtIdComponente" placeholder="Id del componente"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+	
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnBuscarComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnBuscarComponente" name="btnBuscarComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>			
+			<form class="form-horizontal d-none" name="frmModificarComponente" id="frmModificarComponente" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Modificar componente</legend>
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModIdComponente">IdComponente</label>
+						<div class="col-xs-4">
+							<input disabled id="txtModIdComponente" name="txtModIdComponente" 
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModNombre">Nombre del componente</label>
+						<div class="col-xs-4">
+							<input id="txtModNombre" name="txtModNombre"
+								class="form-control input-md" type="text">
+
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModDescripcion">Descripción</label>
+						<div class="col-xs-4">
+							<input id="txtModDescripcion" name="txtModDescripcion"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Number input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModPrecio">Precio</label>
+						<div class="col-xs-4">
+							<input id="txtModPrecio" name="txtModPrecio" 
+								class="form-control input-md" type="number">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="lstModTipo">Tipo</label>
+						<div class="col-xs-4">
+							<select  class="form-select" name="lstModTipo" id="lstModTipo">
+
+							</select>
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarModComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarModComponente" name="btnAceptarModComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+			<form class="form-horizontal d-none" name="frmAltaComponente" id="frmAltaComponente" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Alta de componente</legend>
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaNombre">Nombre del componente</label>
+						<div class="col-xs-4">
+							<input id="txtAltaNombre" name="txtAltaNombre"
+								class="form-control input-md" type="text">
+
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaDescripcion">Descripción</label>
+						<div class="col-xs-4">
+							<input id="txtAltaDescripcion" name="txtAltaDescripcion"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Number input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaPrecio">Precio</label>
+						<div class="col-xs-4">
+							<input id="txtAltaPrecio" name="txtAltaPrecio" 
+								class="form-control input-md" type="number">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="lstAltaTipo">Tipo</label>
+						<div class="col-xs-4">
+							<select  class="form-select" name="lstAltaTipo" id="lstAltaTipo">
+
+							</select>
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarAltaComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarAltaComponente" name="btnAceptarAltaComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+			<form class="form-horizontal d-none" name="frmListadoPrecio" id="frmListadoPrecio" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Listado de componentes por precio</legend>
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtPrecioMinimo">Precio mínimo</label>
+						<div class="col-xs-4">
+							<input id="txtPrecioMinimo" name="txtPrecioMinimo"
+								class="form-control input-md" type="text" value="0.00" required>
+
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtPrecioMaximo">Precio máximo</label>
+						<div class="col-xs-4">
+							<input id="txtPrecioMaximo" name="txtPrecioMaximo"
+								class="form-control input-md" type="text" value="1000.00"required>
+
+						</div>
+					</div>
+					
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarListadoPorPrecio"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarListadoPorPrecio" name="btnAceptarListadoPorPrecio"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<form class="form-horizontal d-none" name="frmBuscarTipoNombre" id="frmBuscarTipoNombre" >
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Buscar un tipo de componente por nombre</legend>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtNombreTipo">Nombre del tipo de componente</label>
+						<div class="col-xs-4">
+							<input id="txtNombreTipo" name="txtNombreTipo" placeholder="Nombre del tipo de componente"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+	
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnBuscarTipoNombre"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnBuscarTipoNombre" name="btnBuscarTipoNombre"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>		
+		</div>
+	</div>
+
+	<div class="container" id="resultadoBusqueda"></div>
+	<div class="container" id="listados"></div>
+	
+	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript" src="js/objetos.js"></script>
+	<script type="text/javascript" src="js/codigo.js"></script>
+</body>
+
+</html>

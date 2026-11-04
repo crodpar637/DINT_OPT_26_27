@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBDD</title>
 </head>
+
 <body>
-    
+
     <input type="button" name="btnPedirDatos" id="btnPedirDatos" value="Pedir Datos">
-    
+
     <div id="resultado"></div>
 
     <script>
@@ -17,12 +19,12 @@
 
         async function traerDatos() {
             // IMPORTANTE: Adaptar ruta
-            let oURL = new URL("http:/localhost/backend/get_personas.php");
+            let oURL = new URL("http:/localhost/DINT/JS/Ejemplos_fetch/backend/get_personas.php");
 
-            let respuestaServidor = await fetch( oURL, { method: "GET" });
+            let respuestaServidor = await fetch(oURL, { method: "GET" });
 
             // Si no es una respuesta OK
-            if (!respuestaServidor.ok) { 
+            if (!respuestaServidor.ok) {
                 console.error("Error al acceder al acceder al servidor (STATUS != 200..299).");
                 response = {
                     ok: false,
@@ -36,24 +38,35 @@
                     ok: true,
                     mensaje: "OK",
                     status: respuestaServidor.status,
-                    datos : await respuestaServidor.json() // await
+                    datos: await respuestaServidor.json() // await
                 };
             }
-            
+
             procesarRepuesta(response);
         }
 
 
         function procesarRepuesta(response) {
             let salida = document.querySelector("#resultado");
-            if(!response.ok) {
+            if (!response.ok) {
                 salida.innerHTML = response.mensaje + "<br>";
                 salida.innerHTML += response.status + "<br>";
-            } else{
+            } else {
+                mensaje = "<table><thead><tr><th>ID</th><th>NAME</th></tr></thead><tbody>";
                 
-                
+                for (let fila of response.datos) {
+                    mensaje += "<tr><td>" + fila.id + "</td>";
+                    mensaje += "<td>" + fila.name + "</td></tr>";
+                }
+
+                mensaje += "</tbody></table>"
+
+                salida.innerHTML = mensaje;
+                console.log(mensaje);
+
             }
         }
     </script>
 </body>
+
 </html>
