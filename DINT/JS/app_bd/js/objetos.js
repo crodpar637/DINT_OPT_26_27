@@ -133,9 +133,9 @@ class Empresa {
   }
 
   async getTipos() {
-    let datos = new FormData();
+    // let datos = new FormData();
 
-    let respuesta = await peticionGET("get_tipos.php", datos);
+    let respuesta = await peticionGET("get_tipos.php");
 
     return respuesta;
   }

@@ -1,7 +1,9 @@
 <?php
-
+session_start();
 // Recupero datos de parametro en forma de array asociativo
 $componente = json_decode($_POST['componente'],true);
+
+$_SESSION['idcomponente'] = $componente['idcomponente'];
 
 require_once("funcionesBD.php");
 $conexion = obtenerConexion();

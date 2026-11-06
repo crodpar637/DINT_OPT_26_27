@@ -8,7 +8,7 @@ const rutaBackend = "http://localhost/DINT/JS/app_bd/backend/";
  * @param {FormData} parametros - Objeto FormData con los parámetros de la llamada 
  * @returns {Object} response
  */
-async function peticionGET(url, parametros) {
+async function peticionGET(url, parametros = new FormData()) {
     let response;
 
     try {

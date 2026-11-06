@@ -99,6 +99,7 @@ function obtenerConexion()
 
         // Fijamos el conjunto de caracteres a utf8mb4 para soportar emojis y acentos
         $conexion->set_charset("utf8mb4");
+        
         return $conexion;
     } catch (mysqli_sql_exception $e) {
         // En caso de error de conexión, devolvemos un JSON con error y paramos

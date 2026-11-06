@@ -1,0 +1,18 @@
+Usuario admin
+admin@admin.com
+Password
+admin
+
+Usuario normal 1
+julia@ieshnosmachado.org
+Password
+julia
+
+Usuario normal 2
+lola@ieshnosmachado.org
+Password
+lola
+
+Importar la base de datos desde sql/electrodomesticos.sql
+
+Se creará la base de datos 'electrodomesticos'
