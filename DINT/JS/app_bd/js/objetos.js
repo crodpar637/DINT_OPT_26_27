@@ -195,9 +195,8 @@ class Empresa {
   }
 
   async listadoComponentes() {
-    let datos = new FormData();
-
-    let respuesta = await peticionGET("get_componentes.php", datos);
+    
+    let respuesta = await peticionGET("get_componentes.php");
 
     return respuesta;
   }

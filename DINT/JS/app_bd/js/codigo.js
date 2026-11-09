@@ -1,6 +1,7 @@
 "use strict";
 
 // MAIN PROGRAM
+// Declarada con var para poder acceder desde otra pestaña
 var oEmpresa = new Empresa();
 
 registrarEventos();

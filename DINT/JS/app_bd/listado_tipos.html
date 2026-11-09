@@ -6,21 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        @media print {
+            #imprimir { display: none; }
+        }
+    </style>
     <title>Tipos de componentes</title>
 </head>
 
 <body>
     <div class="container-fluid">
-        <h3>Listado de tipos de componentes</h3>
+        <h3>Listado de tipos de componentes <span id="primerTipo"></span></h3>
         <div id="listado"></div>
+        <input type="button" class="btn btn-primary" id="imprimir" value="Imprimir">
     </div>
 
     <script>
         // window.addEventListener("load", cargarListado);
         cargarListado();
+        document.querySelector("#imprimir").addEventListener("click", () => window.print());
         
         async function cargarListado() {
             document.querySelector("#listado").innerHTML = await opener.oEmpresa.listadoTipoComponentes();
+
+            // EJEMPLO DE COLOCACION DE DATOS EN LA PLANTILLA
+            // let respuesta = await opener.oEmpresa.buscarComponente(1);
+
+            // document.querySelector("#primerTipo").innerHTML = respuesta.datos.nombre;
         }
 
     </script>
