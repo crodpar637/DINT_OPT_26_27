@@ -3,7 +3,7 @@ require_once('config.php');
 $conexion = obtenerConexion();
 
 // Recoger datos de entrada
-$idcomponente = $_POST['idcomponente'];
+$idcomponente = $_GET['idcomponente'];
 
 // SQL
 $sql = "SELECT c.*, p.descripcion AS tipodesc FROM componente c, tipo p 
@@ -16,9 +16,9 @@ $resultado = mysqli_query($conexion, $sql);
 $fila = mysqli_fetch_assoc($resultado);
 
 if($fila){ // Devuelve datos
-    // responder(datos, error, mensaje, conexion)
-    responder($fila, false, "Datos recuperados", $conexion);
+    // responder(datos, ok, mensaje, conexion)
+    responder($fila, true, "Datos recuperados", $conexion);
 } else { // No hay datos
-    responder(null, true, "No existe el componente", $conexion);
+    responder(null, false, "No existe el componente", $conexion);
 }
 

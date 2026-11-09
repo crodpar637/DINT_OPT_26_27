@@ -30,34 +30,34 @@ function registrarEventos() {
   document
     .querySelector("#mnuListadoPorPrecio")
     .addEventListener("click", mostrarFormulario);
-    document
+  document
     .querySelector("#mnuBuscarTipoNombre")
     .addEventListener("click", mostrarFormulario);
   // Botones
   frmAltaTipo.btnAceptarAltaTipo.addEventListener("click", procesarAltaTipo);
   frmBuscarComponente.btnBuscarComponente.addEventListener(
     "click",
-    procesarBuscarComponente
+    procesarBuscarComponente,
   );
   frmListadoTipo.btnAceptarListadoPorTipo.addEventListener(
     "click",
-    procesarListadoPorTipo
+    procesarListadoPorTipo,
   );
   frmModificarComponente.btnAceptarModComponente.addEventListener(
     "click",
-    procesarModificarComponente
+    procesarModificarComponente,
   );
   frmAltaComponente.btnAceptarAltaComponente.addEventListener(
     "click",
-    procesarAltaComponente
+    procesarAltaComponente,
   );
   frmListadoPrecio.btnAceptarListadoPorPrecio.addEventListener(
     "click",
-    procesarListadoPorPrecio
+    procesarListadoPorPrecio,
   );
   frmBuscarTipoNombre.btnBuscarTipoNombre.addEventListener(
     "click",
-    procesarBuscarTipoNombre
+    procesarBuscarTipoNombre,
   );
 }
 
@@ -179,12 +179,12 @@ async function actualizarDesplegableTipos(idTipoSeleccionado) {
 async function procesarBuscarComponente() {
   if (validarBuscarComponente()) {
     let idComponente = parseInt(
-      frmBuscarComponente.txtIdComponente.value.trim()
+      frmBuscarComponente.txtIdComponente.value.trim(),
     );
 
     let respuesta = await oEmpresa.buscarComponente(idComponente);
 
-    if (!respuesta.error) {
+    if (respuesta.ok) {
       // Si NO hay error
       let resultadoBusqueda = document.querySelector("#resultadoBusqueda");
 
@@ -224,31 +224,35 @@ async function procesarListadoPorTipo() {
 
   let respuesta = await oEmpresa.listadoPorTipo(idTipo);
 
-  let tabla = "<table class='table table-striped' id='listadoPorTipo'>";
-  tabla +=
-    "<thead><tr><th>IDCOMPONENTE</th><th>NOMBRE</th><th>DESCRIPCION</th><th>PRECIO</th><th>TIPO</th><th>ACCION</th></tr></thead><tbody>";
-
-  for (let componente of respuesta.datos) {
-    tabla += "<tr><td>" + componente.idcomponente + "</td>";
-    tabla += "<td>" + componente.nombre + "</td>";
-    tabla += "<td>" + componente.descripcion + "</td>";
-    tabla += "<td>" + componente.precio + "</td>";
-    tabla += "<td>" + componente.tipo + "</td>";
-
+  if (respuesta.datos != null) {
+    let tabla = "<table class='table table-striped' id='listadoPorTipo'>";
     tabla +=
-      "<td><button class='btn btn-primary' data-componente='" +
-      JSON.stringify(componente) +
-      "'><i class='bi bi-pencil-square'></i></button></td></tr>";
+      "<thead><tr><th>IDCOMPONENTE</th><th>NOMBRE</th><th>DESCRIPCION</th><th>PRECIO</th><th>TIPO</th><th>ACCION</th></tr></thead><tbody>";
+
+    for (let componente of respuesta.datos) {
+      tabla += "<tr><td>" + componente.idcomponente + "</td>";
+      tabla += "<td>" + componente.nombre + "</td>";
+      tabla += "<td>" + componente.descripcion + "</td>";
+      tabla += "<td>" + componente.precio + "</td>";
+      tabla += "<td>" + componente.tipo + "</td>";
+
+      tabla +=
+        "<td><button class='btn btn-primary' data-componente='" +
+        JSON.stringify(componente) +
+        "'><i class='bi bi-pencil-square'></i></button></td></tr>";
+    }
+
+    tabla += "</tbody></table>";
+
+    // Agregamos el contenido a la capa de listados
+    document.querySelector("#listados").innerHTML = tabla;
+    // Agregar manejador de evento para toda la tabla
+    document
+      .querySelector("#listadoPorTipo")
+      .addEventListener("click", procesarBotonEditarComponente);
+  } else { // respuesta.datos == null
+     document.querySelector("#listados").innerHTML = "<h5 class='mt-3'>No hay componentes del tipo seleccionado</h5>";
   }
-
-  tabla += "</tbody></table>";
-
-  // Agregamos el contenido a la capa de listados
-  document.querySelector("#listados").innerHTML = tabla;
-  // Agregar manejador de evento para toda la tabla
-  document
-    .querySelector("#listadoPorTipo")
-    .addEventListener("click", procesarBotonEditarComponente);
 }
 
 function procesarBotonEditarComponente(oEvento) {
@@ -256,6 +260,7 @@ function procesarBotonEditarComponente(oEvento) {
 
   // Verificamos si han hecho clic sobre el botón o el icono
   if (oEvento.target.nodeName == "I" || oEvento.target.nodeName == "BUTTON") {
+    // Obtener la referencia al boton
     if (oEvento.target.nodeName == "I") {
       // Pulsacion sobre el icono
       boton = oEvento.target.parentElement; // El padre es el boton
@@ -289,7 +294,7 @@ async function procesarModificarComponente() {
   // Validar datos del formulario
   if (validarModComponente()) {
     let respuesta = await oEmpresa.modificarComponente(
-      new Componente(idComponente, nombre, descripcion, precio, idTipo)
+      new Componente(idComponente, nombre, descripcion, precio, idTipo),
     );
 
     alert(respuesta.mensaje);
@@ -346,10 +351,11 @@ async function borrarComponente(oEvento) {
 
   alert(respuesta.mensaje);
 
-  if (!respuesta.error) {
+  if (respuesta.ok) {
     // Si NO hay error
     // Borrado de la tabla html
     document.querySelector("#resultadoBusqueda").innerHTML = "";
+    frmBuscarComponente.reset();
   }
 }
 
@@ -424,7 +430,7 @@ async function procesarAltaComponente() {
   // Validar datos del formulario
   if (validarAltaComponente()) {
     let respuesta = await oEmpresa.altaComponente(
-      new Componente(null, nombre, descripcion, precio, idTipo)
+      new Componente(null, nombre, descripcion, precio, idTipo),
     );
     alert(respuesta.mensaje);
 
@@ -466,7 +472,6 @@ function validarAltaComponente() {
   return valido;
 }
 
-
 async function procesarBuscarTipoNombre() {
   let nombreTipo = frmBuscarTipoNombre.txtNombreTipo.value.trim();
 
@@ -480,7 +485,6 @@ async function procesarBuscarTipoNombre() {
     tabla += "<tr><td>" + tipoComponente.idtipo + "</td>";
     tabla += "<td>" + tipoComponente.tipo + "</td>";
     tabla += "<td>" + tipoComponente.descripcion + "</td>";
-    
 
     tabla +=
       "<td><button class='btn btn-primary' data-tipo='" +

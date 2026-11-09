@@ -145,7 +145,7 @@ class Empresa {
 
     datos.append("idcomponente", idComponente);
 
-    let respuesta = await peticionPOST("buscar_componente.php", datos);
+    let respuesta = await peticionGET("buscar_componente.php", datos);
 
     return respuesta;
   }

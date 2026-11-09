@@ -10,6 +10,6 @@ $sql = "DELETE FROM componente WHERE idcomponente = $idcomponente;";
 
 $resultado = mysqli_query($conexion, $sql);
 
-// responder(datos, error, mensaje, conexion)
-responder(null, false, "Datos eliminados", $conexion);
+// responder(datos, ok, mensaje, conexion)
+responder(null, true, "Datos eliminados", $conexion);
 
