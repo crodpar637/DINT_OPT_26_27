@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos propios -->
+    <link href="css/estilos.css" rel="stylesheet">
+
+
+    <title>Examen Librería</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg bg-gradient bg-light bg-gradient-directional">
+            <div class=" container-fluid">
+                <a class="navbar-brand"><img src="favicon.png" width="25" /> Librería "Lee y aprende" </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="mnuCrearLibro">Crear libro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="mnuListado">Listado de libros por género</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Formularios -->
+        <div id="formularios">
+
+            <form name="frmCrearLibro" id="frmCrearLibro" role="form" class="d-none">
+                <fieldset>
+                    <legend>Registrar un libro</legend>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="txtTitulo">Título</label>
+                        <div class="col-4">
+                            <input id="txtTitulo" name="txtTitulo" placeholder="Título"
+                                class="form-control input-md" type="text" step="1">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="txtAutor">Autor</label>
+                        <div class="col-4">
+                            <input id="txtAutor" name="txtAutor" placeholder="Autor"
+                                class="form-control input-md" type="text" step="2">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="txtDescripcion">Descripcion</label>
+                        <div class="col-4">
+                            <textarea id="txtDescripcion" name="txtDescripcion" placeholder="Descripcion"
+                                class="form-control input-md" type="text" step="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="txtImagen">Imagen</label>
+                        <div class="col-4">
+                            <input id="txtImagen" name="txtImagen" placeholder="Url de la imagen de la portada"
+                                class="form-control input-md" type="text" step="4">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="lstGenero" class="col-3 form-label">Género</label>
+                        <div class="col-3">
+                            <select class="form-select" name="lstGenero" id="lstGenero">
+                                <!-- Rellenar desplegable de géneros -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="button" class="offset-3 btn btn-primary" name="btnCrearLibro" id="btnCrearLibro" value="Aceptar">
+                </fieldset>
+            </form>
+
+            <form name="frmListado" id="frmListado" role="form" class="d-none">
+                <fieldset>
+                    <legend>Listar libros de un género</legend>
+                    <div class="row mb-3">
+                        <label for="lstGenero" class="form-label">Género</label>
+                        <div class="col-3">
+                            <select class="form-select" name="lstGenero" id="lstGenero">
+                                <!-- Rellenar desplegable de géneros -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="button" class="btn btn-primary" name="btnListado" id="btnListado" value="Aceptar">
+
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <!-- Scripts propios -->
+    <script src="js/ajax.js"></script>
+    <script src="js/objetos.js"></script>
+    <script src="js/codigo.js"></script>
+
+    <!-- <a href="https://www.flaticon.es/iconos-gratis/libro" title="libro iconos">Libro iconos creados por Smashicons - Flaticon</a> -->
+
+</body>
+
+</html>
