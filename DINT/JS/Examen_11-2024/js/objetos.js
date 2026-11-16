@@ -97,13 +97,20 @@ class Genero {
 }
 
 class Libreria {
-    async crearLibro(oLibro){
+  async crearLibro(oLibro) {
+    let datos = new FormData();
 
-    }
-    async getLibrosGenero(idgenero){
+    datos.append("libro", JSON.stringify(oLibro));   //   $libro = json_decode($_POST["autor"])
 
-    }
-    async getGeneros(){
-        return await peticionGET("get_generos.php", new FormData());
-    }
+    // datos.append("idgenero", oLibro.idgenero);   // $_POST["idgenero"]
+    // datos.append("autor", oLibro.autor);        // $_POST["autor"]
+
+    let respuesta = await peticionPOST("crear_libro.php", datos);
+
+    return respuesta;
+  }
+  async getLibrosGenero(idgenero) {}
+  async getGeneros() {
+    return await peticionGET("get_generos.php", new FormData());
+  }
 }
