@@ -109,7 +109,16 @@ class Libreria {
 
     return respuesta;
   }
-  async getLibrosGenero(idgenero) {}
+  async getLibrosGenero(idgenero) {
+    let datos = new FormData();
+
+    datos.append("idgenero", idgenero);  // $idgenero = $_GET["idgenero"];
+
+    let respuesta = await peticionGET("get_libros_genero.php", datos);
+
+    return respuesta;
+
+  }
   async getGeneros() {
     return await peticionGET("get_generos.php", new FormData());
   }

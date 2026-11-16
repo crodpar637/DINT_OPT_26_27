@@ -78,3 +78,12 @@ async function procesarAltaLibro() {
     frmCrearLibro.classList.add("d-none"); 
   }
 }
+
+async function procesarListado() {
+  let idgenero = frmListado.lstGenero.value.trim();
+  let genero = frmListado.lstGenero.options[frmListado.lstGenero.selectedIndex].textContent;
+
+  open("tarjetas.html?idgenero=" + idgenero + "&genero=" + genero);
+
+  
+}

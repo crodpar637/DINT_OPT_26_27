@@ -3,12 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjetas</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos propios -->
+    <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Codificar aquí de forma manual lo solicitado en el Apartado C  -->
+    <div class="container-fluid">
+        <h1 class="text-center mb-3">LISTADO DE LIBROS DEL GENERO <span id="nombreGenero"></span></h1>
+        <div class="row" id="tarjetas" >
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script>
+        let oURL = new URL(location.href);
+        let idgenero = oURL.searchParams.get("idgenero");
+        let genero = oURL.searchParams.get("genero");
+
+        // Poner el titulo
+        document.querySelector("#nombreGenero").textContent = genero.toUpperCase();
+
+        generarTarjetas(idgenero);
+
+        async function generarTarjetas(idgenero) {
+            let respuesta = await opener.oLibreria.getLibrosGenero(idgenero);
+            let tarjetas = document.querySelector("#tarjetas");
+
+            if (respuesta.ok) {
+                if (respuesta.datos.length == 0) {
+                    tarjetas.innerHTML = "<h3>No hay libros de este genero</h3>";
+                } else {
+                    let cards = "";
+
+                    for (let tarjeta of respuesta.datos) {
+                        cards += `<div class="col-12 col-md-4 col-lg-3">
+                                <div class="card" style="width: 15rem;">
+                                    <img src="${tarjeta.imagen}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${tarjeta.titulo}</h5>
+                                        <p class="fw-light text-muted mb-1">${tarjeta.autor}</p>
+                                        <p class="fw-light text-muted mb-1">${tarjeta.genero}</p>
+                                        <p class="card-text">${tarjeta.descripcion}</p>
+                                    </div>
+                                </div>
+                                </div>
+                                `;
+                    }
+
+                    tarjetas.innerHTML = cards; // Inserto el html de las tarjetas
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
